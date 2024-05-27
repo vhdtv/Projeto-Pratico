@@ -9,10 +9,10 @@
 		<relativePath/> <!-- lookup parent from repository -->
 	</parent>
 	<groupId>com.example</groupId>
-	<artifactId>Artifact-demo</artifactId>
+	<artifactId>Pacient-Data-Manager</artifactId>
 	<version>0.0.1-SNAPSHOT</version>
-	<name>Artifact name</name>
-	<description>Demo project for Spring Boot</description>
+	<name>Pacient Data Manager</name>
+	<description>Projeto acadêmico com o objetivo de armazenar e organizar dados de pacientes</description>
 	<properties>
 		<java.version>22</java.version>
 	</properties>
