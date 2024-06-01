@@ -1,4 +1,4 @@
-package com.example.Artifact.demo;
+package com.example.artifact.demo;
 
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
