@@ -31,4 +31,4 @@ Tabelas a serem criadas (Ainda podem faltar campos, use isso só como guia)
 1.  o que vc ta sentindo?
     - 1.1 por quanto tempo ta sentindo (dias)
     - 1.2 intensidade da dor (1 a 5)
-2.  possui alguma comorbilidade? Se sim, quais?
+2.  possui alguma comorbidade? Se sim, quais?
