@@ -18,5 +18,5 @@ public class Symptom implements Serializable {
     @GeneratedValue(strategy = GenerationType.AUTO)
     private UUID uuid;
     private String name;
-    private double weightSymptom;
+    private int weight;
 }
