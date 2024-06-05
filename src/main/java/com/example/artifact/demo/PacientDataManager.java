@@ -5,9 +5,12 @@ import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.boot.autoconfigure.domain.EntityScan;
 import org.springframework.context.annotation.ComponentScan;
 
-@SpringBootApplication
-@ComponentScan(basePackages = "com.example.artifact")
-@EntityScan(basePackages = "com.example.artifact.models")
+@SpringBootApplication(scanBasePackages = { "com.example.artifact.models", "com.example.artifact.dto",
+		"com.example.artifact.repositories", "com.example.artifact.controllers" })
+@ComponentScan(basePackages = { "com.example.artifact.models", "com.example.artifact.dto",
+		"com.example.artifact.repositories", "com.example.artifact.controllers" })
+@EntityScan(basePackages = { "com.example.artifact.models", "com.example.artifact.dto",
+		"com.example.artifact.repositories", "com.example.artifact.controllers" })
 public class PacientDataManager {
 
 	public static void main(String[] args) {
