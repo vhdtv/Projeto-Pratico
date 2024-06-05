@@ -1,4 +1,4 @@
-package com.example.artifact.controllers;
+package com.example.controllers;
 
 import java.util.Optional;
 
@@ -11,9 +11,9 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RestController;
 
-import com.example.artifact.dto.GenreRecordDto;
-import com.example.artifact.models.GenreModel;
-import com.example.artifact.repositories.GenreRepository;
+import com.example.dto.GenreRecordDto;
+import com.example.models.GenreModel;
+import com.example.repositories.GenreRepository;
 
 import jakarta.validation.Valid;
 

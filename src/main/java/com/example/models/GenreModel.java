@@ -1,4 +1,4 @@
-package com.example.artifact.models;
+package com.example.models;
 
 import jakarta.persistence.*;
 
