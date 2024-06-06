@@ -8,7 +8,7 @@ import java.util.UUID;
 
 @Entity
 @Table(name = "TB_PATIENTS")
-public class PatientsModel implements Serializable {
+public class PatientModel implements Serializable {
     private static final long serialVersionUID = 1L;
     @Id
     @Column(unique = true)
