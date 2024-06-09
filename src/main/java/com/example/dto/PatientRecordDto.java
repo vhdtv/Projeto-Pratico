@@ -1,8 +1,8 @@
 package com.example.dto;
 
-import jakarta.validation.constraints.NotBlank;
+import java.util.Optional;
 
-public record PatientRecordDto(@NotBlank String name, @NotBlank String motherName, @NotBlank String birthday,
-        int genre, int address, String phoneNumber, String email) {
+public record PatientRecordDto(String name, String motherName, String birthday,
+        int genre, Optional<Integer> address, Optional<String> phoneNumber, Optional<String> email) {
 
 }
