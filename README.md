@@ -16,15 +16,15 @@ Tabelas a serem criadas (Ainda podem faltar campos, use isso só como guia)
 |STATUS | nome | colunas | Observações|
 |-|-|-|-|
 |CRIADA | patients | uuid, name, mother_name, father_name, birthday, genre*, address*, phoneNumber, email||
-|NÃO CRIADA | attendants | uuid, name, username, password_hash, email, phone_number, speciality||
-|NÃO CRIADA | priorities | uuid, name||
-|NÃO CRIADA | genres | uuid, name||
-|NÃO CRIADA | symptoms | uuid, name, weight||
-|NÃO CRIADA | comorbidities | uuid, name, weight||
-|NÃO CRIADA | attendance_registrations | uuid, patients*, attendant*, birthday, annotations, priority* | antiga tabela relatorios|
-|NÃO CRIADA | service_queues | uuid, patients*, attendance_registration*, arrival_date, priority* | |
-|NÃO CRIADA | service_queues_history | uuid, patients*, attendance_registration*, arrival_date, priority*, departure_date||
-|NÃO CRIADA | patient_xref_symptoms | uuid, symptom*, patient*, annotations, intensity, average_days, attendance_registrations* | Guarda as questões|
+|CRIADA | attendants | uuid, name, username, password_hash, email, phone_number, speciality||
+|CRIADA | priorities | uuid, name||
+|CRIADA | genres | uuid, name||
+|CRIADA | symptoms | uuid, name, weight||
+|CRIADA | comorbidities | uuid, name, weight||
+|CRIADA | attendance_registrations | uuid, patients*, attendant*, birthday, annotations, priority* | antiga tabela relatorios|
+|CRIADA | service_queues | uuid, patients*, attendance_registration*, arrival_date, priority* | |
+|CRIADA | service_queues_history | uuid, patients*, attendance_registration*, arrival_date, priority*, departure_date||
+|CRIADA | patient_xref_symptoms | uuid, symptom*, patient*, annotations, intensity, average_days, attendance_registrations* | Guarda as questões|
 
 
 ## Possível forma de fazer o formulário para o paciente:

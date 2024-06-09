@@ -1,7 +1,6 @@
 package com.example.models;
 
 import jakarta.persistence.*;
-
 import java.io.Serializable;
 
 @Entity
