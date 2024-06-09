@@ -1,4 +1,4 @@
-package com.example.artifact.models;
+package com.example.models;
 
 import jakarta.persistence.*;
 import java.io.Serializable;
@@ -6,8 +6,8 @@ import java.util.Date;
 import java.util.UUID;
 
 @Entity
-@Table(name = "TB_SERVICE_QUEUE")
-public class ServiceQueueModel implements Serializable {
+@Table(name = "TB_SERVICE_QUEUE_HISTORY")
+public class ServiceQueueHistoryModel implements Serializable {
     @Id
     @Column(unique = true)
     @GeneratedValue(strategy = GenerationType.AUTO)
@@ -22,9 +22,11 @@ public class ServiceQueueModel implements Serializable {
     private AttendanceRegistrationModel attendance_registration;
 
     private Date arrival_date;
+    private Date departure_date;
 
     @ManyToOne
     @JoinColumn(name = "priority_id", nullable = false)
     private PriorityModel priority;
 
+    // Getters and Setters
 }
