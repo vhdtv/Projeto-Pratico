@@ -32,6 +32,10 @@ public class PatientModel implements Serializable {
     @Column(length = 50)
     private String email;
 
+    public PatientModel(UUID id) {
+        this.setId(id);
+    }
+
     public void setId(UUID id) {
         this.id = id;
     }
