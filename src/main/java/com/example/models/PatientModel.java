@@ -17,22 +17,27 @@ public class PatientModel implements Serializable {
     @Column(length = 50)
     private String name;
     @Column(length = 50)
-    private String mother_name;
+    private String motherName;
     @Column(length = 50)
-    private String father_name;
+    private String fatherName;
     private Date birthday;
     @OneToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "GenreModel.id")
+    @JoinColumn(name = "fk_genre")
     private GenreModel genre;
     @OneToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "AddressModel.id")
+    @JoinColumn(name = "fk_model")
     private AddressModel address;
     @Column(length = 20)
     private String phone_number;
     @Column(length = 50)
     private String email;
 
+    public PatientModel() {
+        super();
+    }
+
     public PatientModel(UUID id) {
+        super();
         this.setId(id);
     }
 
@@ -52,20 +57,20 @@ public class PatientModel implements Serializable {
         return this.name;
     }
 
-    public void setMother_name(String mother_name) {
-        this.mother_name = mother_name;
+    public void setMotherName(String motherName) {
+        this.motherName = motherName;
     }
 
-    public String getMother_name() {
-        return this.mother_name;
+    public String getMotherName() {
+        return this.motherName;
     }
 
-    public void setFather_name(String father_name) {
-        this.father_name = father_name;
+    public void setFatherName(String fatherName) {
+        this.fatherName = fatherName;
     }
 
-    public String getFather_name() {
-        return this.father_name;
+    public String getFatherName() {
+        return this.fatherName;
     }
 
     public void setBirthday(Date birthday) {
@@ -80,8 +85,8 @@ public class PatientModel implements Serializable {
         this.genre = genre;
     }
 
-    public GenreModel getGenre() {
-        return this.genre;
+    public String getGenre() {
+        return this.genre.getName();
     }
 
     public void setId_address(AddressModel address) {
