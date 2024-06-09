@@ -31,7 +31,7 @@ public class GenreController {
     @PostMapping("/genre")
     public ResponseEntity<GenreModel> saveGenre(@RequestBody @Valid GenreRecordDto genreRecordDto) {
         GenreModel genreModel = new GenreModel();
-        genreModel.setId((int) this.genreRepository.count());
+        genreModel.setId((int) this.genreRepository.count()+1);
         BeanUtils.copyProperties(genreRecordDto, genreModel);
         return ResponseEntity.status(HttpStatus.CREATED).body(genreRepository.save(genreModel));
     }
