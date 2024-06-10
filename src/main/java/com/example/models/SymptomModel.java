@@ -31,5 +31,10 @@ public class SymptomModel implements Serializable {
     }
     public void setWeight(int weight) {
         this.weight = weight;
-    }   
+    }
+    public SymptomModel() {
+        super();
+        this.uuid = UUID.randomUUID();
+    }
+       
 }
