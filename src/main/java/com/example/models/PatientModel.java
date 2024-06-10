@@ -17,20 +17,25 @@ public class PatientModel implements Serializable {
     @Column(length = 50)
     private String name;
     @Column(length = 50)
-    private String mother_name;
+    private String motherName;
     @Column(length = 50)
-    private String father_name;
+    private String fatherName;
     private Date birthday;
     @OneToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "GenreModel.id")
+    @JoinColumn(name = "fk_genre")
     private GenreModel genre;
-    @OneToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "AddressModel.id")
+    @OneToOne(cascade = CascadeType.ALL)
+    @JoinColumn(name = "fk_address")
     private AddressModel address;
     @Column(length = 20)
-    private String phone_number;
+    private String phoneNumber;
     @Column(length = 50)
     private String email;
+
+    public PatientModel() {
+        super();
+        this.id = UUID.randomUUID();
+    }
 
     public void setId(UUID id) {
         this.id = id;
@@ -48,20 +53,20 @@ public class PatientModel implements Serializable {
         return this.name;
     }
 
-    public void setMother_name(String mother_name) {
-        this.mother_name = mother_name;
+    public void setMotherName(String motherName) {
+        this.motherName = motherName;
     }
 
-    public String getMother_name() {
-        return this.mother_name;
+    public String getMotherName() {
+        return this.motherName;
     }
 
-    public void setFather_name(String father_name) {
-        this.father_name = father_name;
+    public void setFatherName(String fatherName) {
+        this.fatherName = fatherName;
     }
 
-    public String getFather_name() {
-        return this.father_name;
+    public String getFatherName() {
+        return this.fatherName;
     }
 
     public void setBirthday(Date birthday) {
@@ -76,8 +81,8 @@ public class PatientModel implements Serializable {
         this.genre = genre;
     }
 
-    public GenreModel getGenre() {
-        return this.genre;
+    public String getGenre() {
+        return this.genre.getName();
     }
 
     public void setId_address(AddressModel address) {
@@ -88,12 +93,12 @@ public class PatientModel implements Serializable {
         return this.address;
     }
 
-    public void setPhone_number(String phone_number) {
-        this.phone_number = phone_number;
+    public void setPhoneNumber(String phoneNumber) {
+        this.phoneNumber = phoneNumber;
     }
 
-    public String getPhone_number() {
-        return this.phone_number;
+    public String getPhoneNumber() {
+        return this.phoneNumber;
     }
 
     public void setEmail(String email) {
