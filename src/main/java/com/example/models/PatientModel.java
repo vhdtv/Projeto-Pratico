@@ -24,21 +24,17 @@ public class PatientModel implements Serializable {
     @OneToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "fk_genre")
     private GenreModel genre;
-    @OneToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "fk_model")
+    @OneToOne(cascade = CascadeType.ALL)
+    @JoinColumn(name = "fk_address")
     private AddressModel address;
     @Column(length = 20)
-    private String phone_number;
+    private String phoneNumber;
     @Column(length = 50)
     private String email;
 
     public PatientModel() {
         super();
-    }
-
-    public PatientModel(UUID id) {
-        super();
-        this.setId(id);
+        this.id = UUID.randomUUID();
     }
 
     public void setId(UUID id) {
@@ -97,12 +93,12 @@ public class PatientModel implements Serializable {
         return this.address;
     }
 
-    public void setPhone_number(String phone_number) {
-        this.phone_number = phone_number;
+    public void setPhoneNumber(String phoneNumber) {
+        this.phoneNumber = phoneNumber;
     }
 
-    public String getPhone_number() {
-        return this.phone_number;
+    public String getPhoneNumber() {
+        return this.phoneNumber;
     }
 
     public void setEmail(String email) {
