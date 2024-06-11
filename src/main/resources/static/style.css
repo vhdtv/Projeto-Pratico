@@ -1,0 +1,126 @@
+:root {
+    --light-1: #ffffff;
+    --light-2: #f3f3f3;
+    --dark-1: #11121e;
+    --dark-2: #1d1d29;
+    --sec-orange: #ffbc11;
+    --sec-blue: #4578f9;
+    --sec-green: #43b430;
+    --sec-pink: #cb3eff;
+    --typo-color-white: #fff;
+    --typo-color-gray: #7b7b7b;
+    --typo-color-black: #010;
+}
+
+.material-symbols-rounded {
+  font-variation-settings:
+  'FILL' 0,
+  'wght' 400,
+  'GRAD' 0,
+  'opsz' 24
+}
+
+* {
+    --main-bg: var(--light-2);
+    --main-text: var(var(--typo-color-black));
+    --aside-bg: var(--light-1);
+}
+
+body {
+    background: var(--main-bg);
+    min-width: 100vw;
+    min-height: 100vh;
+    color: var(--main-text);
+    display: flex;
+}
+
+aside {
+    height: 100dvh;
+    min-width: 200px;
+    background: var(--aside-bg);
+    padding: 2rem 0;
+}
+aside .logo {
+    width: 200px;
+    height: 80px;
+    object-fit: contain;
+}
+
+main {
+    flex: 1 1 auto;
+    overflow: auto;
+    background: var(--main-bg);
+    position: relative;
+    max-height: 100vh;
+    padding: 0 2rem;
+}
+
+header {
+    display: inline-flex;
+    gap: .5rem;
+    font-size: 8px;
+    align-items: center;
+    justify-content: center;
+    position: fixed;
+    padding: 1rem;
+    top: 0;
+    right: 2rem;
+}
+header img {
+    border-radius: 100%;
+    border: 1px solid #4444;
+    max-width: 2rem;
+    max-height: 2rem;
+    object-fit: cover;
+    object-position: center;
+}
+header h3 {
+    font-size: .8rem;
+    line-height: .6rem;
+    margin: 0;
+}
+
+ul {
+    list-style-type: none;
+}
+
+ul li {
+    margin-bottom: .5rem;
+}
+
+ul li a {
+    color: inherit;
+    text-decoration: none;
+    display: flex;
+    gap: .5rem;
+    align-items: center;
+    padding: 0.4rem 0.6rem;
+    background: rgba(0, 0, 12, .1);
+    border-radius: 5rem;
+    font-size: .9rem;
+}
+
+.main-link {
+    background: var(--sec-orange);
+}
+
+.priority {
+    width: 10px;
+    height: 10px;
+    display: inline-block;
+    position: relative;
+    border-radius: 100%;
+    margin-right: .5rem;
+}
+.priority-red {
+    background-color: crimson;
+}
+.priority-blue {
+    background-color: blue;
+}
+.priority-yellow {
+    background-color: orange;
+}
+.priority-green {
+    background-color: greenyellow;
+}
