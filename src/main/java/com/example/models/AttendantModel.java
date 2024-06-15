@@ -42,6 +42,10 @@ public class AttendantModel implements Serializable {
         this.username = username;
     }
 
+    public String getPasswordHash() {
+        return this.passwordHash;
+    }
+
     public void setPasswordHash(String passwordHash) {
         this.passwordHash = passwordHash;
     }
