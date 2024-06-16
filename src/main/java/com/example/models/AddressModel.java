@@ -29,14 +29,26 @@ public class AddressModel implements Serializable {
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     private UUID id;
+    @Column(name = "first_line")
     private String firstLine;
-
+    @Column(name = "house_number")
     private String houseNumber;
-
+    @Column(name = "residence_type")
     private String residenceType;
+    @Column(name = "second_line")
     private String secondLine; // acts like the neighborhood
     private String city;
     private String state;
+    @Column(name = "postal_code")
+    private String postalCode;
+
+    public String getPostalCode() {
+        return postalCode;
+    }
+
+    public void setPostalCode(String postalCode) {
+        this.postalCode = postalCode;
+    }
 
     public String getResidenceType() {
         return residenceType;

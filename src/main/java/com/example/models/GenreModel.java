@@ -7,7 +7,6 @@ import java.io.Serializable;
 @Table(name = "TB_GENRE")
 public class GenreModel implements Serializable {
     @Id
-    @Column(unique = true)
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int id;
     private String name;

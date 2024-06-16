@@ -19,7 +19,7 @@ public class ServiceQueueHistoryModel implements Serializable {
 
     @ManyToOne
     @JoinColumn(name = "attendance_registration_id", nullable = false)
-    private AttendanceRegistrationModel attendance_registration;
+    private ReportModel attendance_registration;
 
     private Date arrival_date;
     private Date departure_date;

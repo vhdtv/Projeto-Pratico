@@ -13,7 +13,7 @@ public class AttendantModel implements Serializable {
     private UUID uuid;
     private String name;
     private String username;
-    private String passwordHash;
+    private String password;
     private String email;
     private String phone_number;
     private String speciality;
@@ -42,12 +42,12 @@ public class AttendantModel implements Serializable {
         this.username = username;
     }
 
-    public String getPasswordHash() {
-        return this.passwordHash;
+    public String getPassword() {
+        return this.password;
     }
 
-    public void setPasswordHash(String passwordHash) {
-        this.passwordHash = passwordHash;
+    public void setPassword(String password) {
+        this.password = password;
     }
 
     public String getEmail() {

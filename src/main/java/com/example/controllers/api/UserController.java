@@ -1,4 +1,4 @@
-package com.example.controllers;
+package com.example.controllers.api;
 
 import com.example.dto.AttendantRecordDto;
 import com.example.models.AttendantModel;
@@ -18,7 +18,7 @@ public class UserController {
     @PostMapping("/login")
     public ResponseEntity<?> authenticateUser(@RequestBody AttendantRecordDto attendantDto) {
         AttendantModel optionalAttendant = attendantRepository
-                .findByEmailAndPasswordHash(attendantDto.email(), attendantDto.password()).orElse(null);
+                .findByEmailAndPassword(attendantDto.email(), attendantDto.password()).orElse(null);
         if (optionalAttendant == null) {
             return ResponseEntity.status(HttpStatus.NOT_FOUND).body("User not found");
         }
