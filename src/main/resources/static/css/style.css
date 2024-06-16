@@ -28,4 +28,7 @@ body {
 .priority.priority-red {
     background: crimson;
 }
+.priority.priority-blue {
+    background: rgb(52, 66, 192);
+}
 
