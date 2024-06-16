@@ -17,7 +17,7 @@ import com.example.repositories.PatientRepository;
 
 @Controller
 @RequestMapping("/patient")
-public class PatientListController {
+public class PatientController {
     @Autowired
     PatientRepository patientRepository;
     @Autowired
