@@ -8,8 +8,6 @@ import java.util.List;
 import java.util.Set;
 import java.util.UUID;
 
-import org.springframework.core.annotation.Order;
-
 @Entity
 @Table(name = "tb_report")
 public class ReportModel implements Serializable {
@@ -34,11 +32,23 @@ public class ReportModel implements Serializable {
     @OrderBy("fk_symptom")
     private Set<ReportXrefSymptomsModel> symptoms;
 
-    @Column
     private Date createdAt;
 
-    @Column
+    private Date updatedAt;
+
+    @OneToOne
+    @JoinColumn(name = "queue_id", referencedColumnName = "id")
+    private ServiceQueueModel queue;
+
     private String annotations;
+
+    public Date getUpdatedAt() {
+        return updatedAt;
+    }
+
+    public void setUpdatedAt(Date updatedAt) {
+        this.updatedAt = updatedAt;
+    }
 
     public UUID getUuid() {
         return uuid;
@@ -97,5 +107,13 @@ public class ReportModel implements Serializable {
 
     public void setSymptoms(Set<ReportXrefSymptomsModel> symptoms) {
         this.symptoms = symptoms;
+    }
+
+    public ServiceQueueModel getQueue() {
+        return queue;
+    }
+
+    public void setQueue(ServiceQueueModel queue) {
+        this.queue = queue;
     }
 }

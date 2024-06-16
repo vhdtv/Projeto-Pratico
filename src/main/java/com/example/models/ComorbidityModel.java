@@ -4,6 +4,12 @@ import jakarta.persistence.*;
 import java.io.Serializable;
 import java.util.UUID;
 
+/**
+ * Entidade que representa uma comorbidade
+ * uuid -> identificador
+ * name -> nome da comorbidade
+ * multiply_factor -> numero que multiplica o valor de alguns sintomas
+ */
 @Entity
 @Table(name = "TB_COMORBIDITY")
 public class ComorbidityModel implements Serializable {
@@ -12,14 +18,14 @@ public class ComorbidityModel implements Serializable {
     @GeneratedValue(strategy = GenerationType.AUTO)
     private UUID uuid;
     private String name;
-    private double weight;
+    private double multiplyFactor;
 
-    public double getWeight() {
-        return weight;
+    public double getMultiplyFactor() {
+        return multiplyFactor;
     }
 
-    public void setWeight(double weight) {
-        this.weight = weight;
+    public void setMultiplyFactor(double multiplyFactor) {
+        this.multiplyFactor = multiplyFactor;
     }
 
     public String getName() {

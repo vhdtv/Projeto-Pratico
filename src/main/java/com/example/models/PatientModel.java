@@ -4,6 +4,7 @@ import jakarta.persistence.*;
 
 import java.io.Serializable;
 import java.sql.Date;
+import java.util.List;
 import java.util.UUID;
 
 @Entity
@@ -23,6 +24,9 @@ public class PatientModel implements Serializable {
     @ManyToOne
     @JoinColumn(name = "fk_genre")
     private GenreModel genre;
+    @OneToMany
+    private List<ComorbidityModel> comorbidities;
+
     @ManyToOne
     @JoinColumn(name = "fk_address")
     private AddressModel address;
@@ -106,5 +110,13 @@ public class PatientModel implements Serializable {
 
     public String getEmail() {
         return this.email;
+    }
+
+    public List<ComorbidityModel> getComorbidities() {
+        return comorbidities;
+    }
+
+    public void setComorbidities(List<ComorbidityModel> comorbidities) {
+        this.comorbidities = comorbidities;
     }
 }
