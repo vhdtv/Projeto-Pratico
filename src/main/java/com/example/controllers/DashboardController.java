@@ -21,6 +21,8 @@ public class DashboardController {
     public String page(Model context) {
         List<ReportModel> attendanceRegistrations = this.attendanceRegistrationRepository.findAll();
         context.addAttribute("lastAttendanceRegistrations", attendanceRegistrations);
+        int totalPacients = (int) this.attendanceRegistrationRepository.count();
+        context.addAttribute("totalPatients", totalPacients);
         return "pages/dashboard";
     }
 }
