@@ -1,15 +1,31 @@
+
+
 <!DOCTYPE html>
 <html lang="pt_BR" xmlns:th="https://www.thymeleaf.org/">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
+    <link rel="stylesheet" href="/css/styleLogin.css">
+    <title>Sistema de Prioridade</title>
 </head>
 <body>
-    <form th:action="@{/login}" th:object="${user}" method="post" accept="">
-        <input type="text" th:field="*{email}" placeholder="Insira seu email">
-        <input type="text" th:field="*{password}" placeholder="Insira sua senha">
-        <button type="submit">Login</button>
-    </form>
+    <div class="video-background">
+        <video autoplay muted loop>
+            <source src="/video/copy_0383F733-3331-4235-B8C8-A5F11456AD0C.MOV" type="video/mp4">
+            Seu navegador não suporta a tag de vídeo.
+        </video>
+    </div>
+    <section class="area-login">
+        <div class="login">
+            <div>
+                <img src="/img/logo.png" alt="">
+            </div>
+            <form th:action="@{/login}"  th:object="${user}" method="post" accept=""  >
+                <input type="text" th:field="*{email}" name="nome" placeholder="Insira seu email" autofocus>
+                <input type="text" th:field="*{password}" placeholder="Insira sua senha">
+                <input type="submit" value="entrar">
+            </form>
+        </div>
+    </section>
 </body>
 </html>
