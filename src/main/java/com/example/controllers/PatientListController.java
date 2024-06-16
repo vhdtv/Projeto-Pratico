@@ -16,15 +16,15 @@ import com.example.repositories.AttendanceRegistrationRepository;
 import com.example.repositories.PatientRepository;
 
 @Controller
-@RequestMapping("/patient-list")
+@RequestMapping("/patient")
 public class PatientListController {
     @Autowired
     PatientRepository patientRepository;
     @Autowired
     AttendanceRegistrationRepository attendanceRegistrationRepository;
 
-    @GetMapping({ "/", "" })
-    public String getPage(Model context) {
+    @GetMapping({ "/list", "/list/" })
+    public String list(Model context) {
         List<HashMap<String, String>> patientHash = new ArrayList<>();
         List<PatientModel> patients = this.patientRepository.findAll();
         SimpleDateFormat dateFormat = new SimpleDateFormat("dd/MM/yyyy");
