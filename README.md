@@ -7,26 +7,23 @@
 
 > O projeto roda na porta :8090
 
-## TODO:
+Relação entre as tabelas:
+ - Um paciente(tg_patient) se registra no sistema e, com base nos seus sintomas e comorbidade, é calculado a sua prioridade na fila (tb_queue)
+ - Juntamente com esse registro, também é criado um registro de atendimento (tb_report), que é vinculado ao registro da fila
+ - Todos os sintomas são ligados as tabelas de relação entre sintoma e registro de atendimento (tb_report_xref_symptom)
+ - Todos os sintomas são ligados as tabelas de relação entre sintoma e paciente (tb_patient_xref_symptom)
 
-- [ ] Fazer as modelos para as tabelas (olhar os arquivos: GenreModel.java, PatientsModel.java e AddressModel.java)
-- [ ] Criar tela de login do atendente, de dashboard, de lista de pacientes
-- [ ] Criar feature de ver relatório do paciente (front e back)
-
-Tabelas a serem criadas (Ainda podem faltar campos, use isso só como guia)
-|STATUS | nome | colunas | Observações|
-|-|-|-|-|
-|CRIADA | patients | uuid, name, mother_name, father_name, birthday, genre*, address*, phoneNumber, email||
-|CRIADA | attendants | uuid, name, username, password_hash, email, phone_number, speciality||
-|CRIADA | priorities | uuid, name||
-|CRIADA | genres | uuid, name||
-|CRIADA | symptoms | uuid, name, weight||
-|CRIADA | comorbidities | uuid, name, weight||
-|CRIADA | attendance_registrations | uuid, patients*, attendant*, birthday, annotations, priority* | antiga tabela relatorios|
-|CRIADA | service_queues | uuid, patients*, attendance_registration*, arrival_date, priority* | |
-|CRIADA | service_queues_history | uuid, patients*, attendance_registration*, arrival_date, priority*, departure_date||
-|CRIADA | patient_xref_symptoms | uuid, symptom*, patient*, annotations, intensity, average_days, attendance_registrations* | Guarda as questões|
-
+Tabelas
+- tb_genre: Guarda o gênero biológico humano, separado para realizar buscas mais ricas no banco
+- tb_comorbidity: Guarda registro de comorbidades, utilizado para potencializar o valor de sintomas
+- tb_symptom: Guarda os dados dos sintomas
+- tb_patient: Guarda informações do paciente 
+- tb_address: Guarda informações do endereço do paciente, separado para realizar buscas mais ricas no banco
+- tb_priority: Guarda informações que definem a prioridade de atendimento
+- tb_queue: Guarda os registros de pacientes já atendidos ou não
+- tb_report: Guarda o relatorio do atendimento do paciente
+- tb_patient_xref_symptom: Guarda a relação entre paciente e sintoma, usado para realizar buscas mais ricas no banco
+- tb_report_xref_symptom: Guarda a relação entre relatorio e sintoma, usado para realizar buscas mais ricas no banco
 
 ## Possível forma de fazer o formulário para o paciente:
 1.  o que vc ta sentindo?
