@@ -1,4 +1,4 @@
-package com.example.controllers;
+package com.example.controllers.api;
 
 import java.util.List;
 
@@ -22,16 +22,10 @@ public class GenreController {
     @Autowired
     GenreRepository genreRepository;
 
-    /***
-     * Metodo POST para criação de um novo gênero
-     * 
-     * @param genreRecordDto
-     * @return
-     */
     @PostMapping("/genre")
     public ResponseEntity<GenreModel> saveGenre(@RequestBody @Valid GenreRecordDto genreRecordDto) {
         GenreModel genreModel = new GenreModel();
-        genreModel.setId((int) this.genreRepository.count()+1);
+        genreModel.setId((int) this.genreRepository.count() + 1);
         BeanUtils.copyProperties(genreRecordDto, genreModel);
         return ResponseEntity.status(HttpStatus.CREATED).body(genreRepository.save(genreModel));
     }

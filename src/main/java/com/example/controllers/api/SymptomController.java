@@ -1,4 +1,4 @@
-package com.example.controllers;
+package com.example.controllers.api;
 
 import java.util.List;
 import java.util.Optional;
@@ -35,7 +35,7 @@ public class SymptomController {
     public ResponseEntity<Optional<SymptomModel>> getSymptom(@PathVariable UUID id) {
         return ResponseEntity.status(HttpStatus.OK).body(symptomRepository.findById(id));
     }
-    
+
     @PostMapping("/symptom")
     public ResponseEntity<SymptomModel> saveSymptom(@RequestBody @Valid SymptomRecordDto symptomRecordDto) {
         SymptomModel symptomModel = new SymptomModel();

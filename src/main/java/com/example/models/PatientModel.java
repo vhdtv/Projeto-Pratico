@@ -12,7 +12,6 @@ public class PatientModel implements Serializable {
     private static final long serialVersionUID = 1L;
     @Id
     @Column(unique = true)
-    @GeneratedValue(strategy = GenerationType.AUTO)
     private UUID id;
     @Column(length = 50)
     private String name;
@@ -21,10 +20,10 @@ public class PatientModel implements Serializable {
     @Column(length = 50)
     private String fatherName;
     private Date birthday;
-    @OneToOne(fetch = FetchType.LAZY)
+    @ManyToOne
     @JoinColumn(name = "fk_genre")
     private GenreModel genre;
-    @OneToOne(cascade = CascadeType.ALL)
+    @ManyToOne
     @JoinColumn(name = "fk_address")
     private AddressModel address;
     @Column(length = 20)

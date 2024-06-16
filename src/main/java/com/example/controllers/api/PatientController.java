@@ -1,4 +1,4 @@
-package com.example.controllers;
+package com.example.controllers.api;
 
 import java.sql.Date;
 import java.text.ParseException;
