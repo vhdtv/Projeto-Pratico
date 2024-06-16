@@ -6,9 +6,9 @@
     <title>Document</title>
 </head>
 <body>
-    <form th:action="@{/login}" th:object="${attendantModel}" method="post" accept="">
-        <input type="text" th:field="*{username}" placeholder="Insira seu nome de usuário">
-        <input type="text" th:field="*{passwordHash}" placeholder="Insira sua senha">
+    <form th:action="@{/login}" th:object="${user}" method="post" accept="">
+        <input type="text" th:field="*{email}" placeholder="Insira seu email">
+        <input type="text" th:field="*{password}" placeholder="Insira sua senha">
         <button type="submit">Login</button>
     </form>
 </body>

@@ -1,15 +1,11 @@
 <!DOCTYPE html>
-<html lang="pt_BR" xmlns:th="https://www.thymeleaf.org/">
+<html lang="en">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Document</title>
 </head>
 <body>
-    <form th:action="@{/login}" th:object="${attendantModel}" method="post" accept="">
-        <input type="text" th:field="*{username}" placeholder="Insira seu nome de usuário">
-        <input type="text" th:field="*{passwordHash}" placeholder="Insira sua senha">
-        <button type="submit">Login</button>
-    </form>
+    base
 </body>
 </html>

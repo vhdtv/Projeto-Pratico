@@ -1,0 +1,22 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <aside th:fragment="asideMenu" class="w-100 h-100 shadow-sm p-2 d-flex flex-column" style="max-width: 180px">
+        <img src="/img/logo.png" class="w-100 object-fit-contain my-5" style="max-height: 64px; filter: invert(.4)">
+
+        <ul class="list-group small">
+            <li class="list-group-item p-0">
+                <a class="text-decoration-none d-block p-2" href="/queue">Fila de Atendimento</a>
+            </li>
+            <li class="list-group-item p-0">
+                <a class="text-decoration-none d-block p-2" href="/patient-list">Lista de Pacientes</a>
+            </li>
+        </ul>
+    </aside>
+</body>
+</html>

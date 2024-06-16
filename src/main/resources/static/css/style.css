@@ -1,0 +1,31 @@
+body {
+    background: #fafafa;
+}
+.table thead tr td {
+    font-weight: 500;
+    background: #f4f4fb;
+    color: #999aae;
+    font-size: .95em;
+}
+
+.table tbody tr:nth-child(even) td {
+    background: #fafafc;
+}
+
+.priority {
+    width: 12px;
+    height: 12px;
+    position: relative;
+    border-radius: 100%;
+    display: inline-block;
+}
+.priority.priority-green {
+    background: greenyellow;
+}
+.priority.priority-yellow {
+    background: orange;
+}
+.priority.priority-red {
+    background: crimson;
+}
+

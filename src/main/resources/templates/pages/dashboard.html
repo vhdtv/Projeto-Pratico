@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+<html lang="en" class="w-100 h-100">
+<head>
+    <div th:replace="fragments/head :: common"></div>
+    <title>Dashboard</title>
+</head>
+<body class="w-100 h-100">
+    <div th:replace="fragments/header :: profile"></div>
+    <section class="d-flex gap-2 w-100 h-100">
+        <div th:replace="fragments/aside-menu :: asideMenu"></div>
+
+        <main class="flex-grow-1 overflow-y-auto justify-content-center row p-0 pt-5 m-0 align-self-start">
+            <section class="row m-0 mb-3">
+                <div class="col-6 col-md-4 col-lg-3 p-2">
+                    <div class="bg-white shadow-sm rounded-2 p-3 text-center h-100 w-100 d-flex flex-column align-items-center justify-content-center">
+                        <span class="small text-muted">Total de Pacientes</span>
+                        <span class="fw-bold fs-4">30</span>
+                    </div>
+                </div>
+                <div class="col-6 col-md-4 col-lg-3 p-2">
+                    <div class="bg-white shadow-sm rounded-2 p-3 text-center h-100 w-100 d-flex flex-column align-items-center justify-content-center">
+                        <span class="small text-muted">Total de Prioridade Alta</span>
+                        <span class="fw-bold fs-4">30</span>
+                    </div>
+                </div>
+                <div class="col-6 col-md-4 col-lg-3 p-2">
+                    <div class="bg-white shadow-sm rounded-2 p-3 text-center h-100 w-100 d-flex flex-column align-items-center justify-content-center">
+                        <span class="small text-muted">Tempo médio de espera</span>
+                        <span class="fw-bold fs-4">1H 25min</span>
+                    </div>
+                </div>
+                <div class="col-6 col-md-4 col-lg-3 p-2">
+                    <div class="bg-white shadow-sm rounded-2 p-3 text-center h-100 w-100 d-flex flex-column align-items-center justify-content-center">
+                        <span class="small text-muted">Sintoma em Alta</span>
+                        <span class="fw-bold fs-4">Gripe</span>
+                    </div>
+                </div>
+            </section>
+            <section class="row m-0 mb-3">
+                <h2 class="small ps-2 mb-3">Últimos Atendimentos</h2>
+                <table class="table" style="font-size: 12px;">
+                    <thead>
+                        <tr>
+                            <td>#</td>
+                            <td>Nome Paciente</td>
+                            <td>Data/Hora de Entrada</td>
+                            <td>Prioridade</td>
+                            <td>Sintomas</td>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr th:each="register, iStat : ${lastAttendanceRegistrations}">
+                            <td th:text="${iStat.index+1}"></td>
+                            <td th:text="${register.patient.name}"></td>
+                            <td th:text="${#dates.format(register.createdAt, 'dd/MM/yyyy HH:mm:ss')}"></td>
+                            <td th:switch="${#strings.toLowerCase(register.priority.color)}">
+                                <div th:case="'vermelho'" class="d-flex gap-2 align-items-center">
+                                    <span class="priority priority-red"></span>
+                                    <span>Emergência</span>
+                                </div>
+                                <div th:case="'amarelo'" class="d-flex gap-2 align-items-center">
+                                    <span class="priority priority-yellow"></span>
+                                    <span>Urgência</span>
+                                </div>
+                                <div th:case="'verde'" class="d-flex gap-2 align-items-center">
+                                    <span class="priority priority-green"></span>
+                                    <span>Pouca Urgência</span>
+                                </div>
+                                <div th:case="'azul'" class="d-flex gap-2 align-items-center">
+                                    <span class="priority priority-blue"></span>
+                                    <span>Não Urgente</span>
+                                </div>
+                            </td>
+                            <td>
+                                <div class="d-flex gap-1">
+                                    <span th:each="symptom, iStatSymptom : ${register.symptoms}" th:text="${symptom.name + ', '}"></span>
+                                </div>
+                            </td>
+                        </tr>
+                    </tbody>
+                </table>
+            </section>
+        </main>
+    </section>
+</body>
+</html>
