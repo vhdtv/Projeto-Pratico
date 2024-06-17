@@ -25,6 +25,10 @@ public class SymptomModel implements Serializable {
         this.reports = reports;
     }
 
+    public void addReport(ReportXrefSymptomsModel report) {
+        this.reports.add(report);
+    }
+
     public UUID getUuid() {
         return uuid;
     }

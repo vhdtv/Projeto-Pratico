@@ -1,0 +1,16 @@
+<!DOCTYPE html>
+<html lang="en" class="w-100 h-100">
+<head>
+    <div th:replace="fragments/head :: common"></div>
+    <title>Dashboard</title>
+</head>
+<body class="w-100 h-100">
+    <div th:replace="fragments/header :: profile"></div>
+    <section class="d-flex gap-2 w-100 h-100">
+        <div th:replace="fragments/aside-menu :: asideMenu"></div>
+
+        <main class="flex-grow-1 overflow-y-auto justify-content-center row p-0 pt-5 m-0 align-self-start">
+        </main>
+    </section>
+</body>
+</html>

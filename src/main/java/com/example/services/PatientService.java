@@ -32,7 +32,7 @@ public class PatientService {
         BeanUtils.copyProperties(patientRecordDto, patientModel);
 
         patientModel.setBirthday(this.generateBirthdayValue(patientRecordDto.birthday()));
-        GenreModel genre = genreRepository.findById(patientRecordDto.genre()).orElse(null);
+        GenreModel genre = genreRepository.findById(patientRecordDto.genre().getId()).orElse(null);
         if (genre == null)
             throw new Error("Genre was not found, received: " + patientRecordDto.genre());
         patientModel.setGenre(genre);
@@ -75,7 +75,7 @@ public class PatientService {
         return patientRepository.save(patient);
     }
 
-    private Date generateBirthdayValue(String inputDate) {
+    public static Date generateBirthdayValue(String inputDate) {
         SimpleDateFormat dateFormatter = new SimpleDateFormat("dd/MM/yyyy");
         java.util.Date date = new java.util.Date();
         try {
