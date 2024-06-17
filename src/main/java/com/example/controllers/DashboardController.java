@@ -10,10 +10,13 @@ import org.springframework.web.bind.annotation.RequestMapping;
 
 import com.example.models.ReportModel;
 import com.example.repositories.AttendanceRegistrationRepository;
+import com.example.repositories.PriorityRepository;
 
 @Controller
 @RequestMapping("/dashboard")
 public class DashboardController {
+    @Autowired
+    PriorityRepository priorityRepository;
     @Autowired
     AttendanceRegistrationRepository attendanceRegistrationRepository;
 
@@ -23,6 +26,9 @@ public class DashboardController {
         context.addAttribute("lastAttendanceRegistrations", attendanceRegistrations);
         int totalPacients = (int) this.attendanceRegistrationRepository.count();
         context.addAttribute("totalPatients", totalPacients);
+        int totalHighPriorityPatients = this.attendanceRegistrationRepository.findAllByPriorityEquals(this.priorityRepository.findById(1).get() ).size();
+        context.addAttribute("totalHighPriorityPatients", totalHighPriorityPatients);
+        
         return "pages/dashboard";
     }
 }
