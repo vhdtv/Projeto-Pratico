@@ -7,5 +7,5 @@ import com.example.models.PriorityModel;
 
 @Repository
 public interface PriorityRepository extends JpaRepository<PriorityModel, Integer> {
-   
+   PriorityModel findByDescription(String description);
 }
