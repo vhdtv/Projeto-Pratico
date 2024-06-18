@@ -32,9 +32,9 @@ public class ReportModel implements Serializable {
     @OrderBy("fk_symptom")
     private Set<ReportXrefSymptomsModel> symptoms;
 
-    private Date createdAt;
+    private Date createdAt;  //entrada
 
-    private Date updatedAt;
+    private Date updatedAt; //saida
 
     @OneToOne
     @JoinColumn(name = "queue_id", referencedColumnName = "id")

@@ -97,8 +97,8 @@ INSERT INTO TB_ATTENDANT (uuid, name, username, password, email, phone_number, s
     ('ee4b624b-dc87-4826-81f1-712cff6c1a72', 'Lívia Isabella Carvalho', 'lívia_isabella_carvalho', '1Ln2s40S2X', 'liviaisabellacarvalho@ozsurfing.com.br', '(69) 2745-2796', 'Pediatria'),
     ('cf09dc9d-a5d4-493e-a8dd-63455da61298', 'John Doe', 'johndoe', 'password123', 'john@example.com', '1234567890', 'Geral');
 
-INSERT INTO tb_report (uuid, annotations, fk_attendant, fk_patient, fk_priority, created_at) VALUES
-    ('c35050ef-2a32-4670-9a2e-2d98aa91ae73', 'Sentindo sintomas a mais de 2 semanas', 'c25cef14-c78e-414c-964b-154c5043cba1', 'e7829deb-2014-42d5-bfe0-5fb5e6f7d906', 2, '2024-06-15 14:12:10');
+INSERT INTO tb_report (uuid, annotations, fk_attendant, fk_patient, fk_priority, created_at, updated_at) VALUES
+    ('c35050ef-2a32-4670-9a2e-2d98aa91ae73', 'Sentindo sintomas a mais de 2 semanas', 'c25cef14-c78e-414c-964b-154c5043cba1', 'e7829deb-2014-42d5-bfe0-5fb5e6f7d906', 2, '2024-06-15 14:12:10' , '2024-06-15 15:17:10');
 
 INSERT INTO tb_report_xref_symptom (fk_report, fk_symptom) VALUES
     ('c35050ef-2a32-4670-9a2e-2d98aa91ae73', 'b5b45059-5a8b-4916-96cb-f9cd254e5d30'),
