@@ -24,13 +24,13 @@ import com.example.repositories.PriorityRepository;
 public class AttendanceQueueController {
     @Autowired
     AttendanceRegistrationRepository attendanceRegistrationRepository;
-    
+
     @Autowired
     ReportXrefSymptomsRepository reportXrefSymptomsRepository;
-    
+
     @Autowired
     SymptomRepository symptomRepository;
-    
+
     @Autowired
     PriorityRepository priorityRepository;
 
@@ -38,11 +38,11 @@ public class AttendanceQueueController {
     public String getPage(Model context) {
         List<ReportModel> queue = attendanceRegistrationRepository.findAllByUpdatedAtEquals(null);
         Map<ReportModel, Integer> reportWeightMap = new HashMap<>();
-        
+
         for (ReportModel report : queue) {
             int totalSumWeight = 0;
             List<ReportXrefSymptomsModel> symptomsList = reportXrefSymptomsRepository.findAllByReportEquals(report);
-            
+
             for (ReportXrefSymptomsModel symptom : symptomsList) {
                 SymptomModel symptomData = symptomRepository.findById(symptom.getSymptom().getUuid()).orElse(null);
                 if (symptomData != null) {
@@ -52,13 +52,8 @@ public class AttendanceQueueController {
 
             reportWeightMap.put(report, totalSumWeight);
             PriorityModel priority = determinePriority(totalSumWeight);
-            if (priority != null) {
-                report.setPriority(priority);
-                attendanceRegistrationRepository.save(report);
-            } else {
-                // Handle case where no priority is found
-                System.out.println("No priority found for totalSumWeight: " + totalSumWeight);
-            }
+            report.setPriority(priority);
+            attendanceRegistrationRepository.save(report);
         }
 
         queue.sort((r1, r2) -> reportWeightMap.get(r2) - reportWeightMap.get(r1));
@@ -67,14 +62,21 @@ public class AttendanceQueueController {
     }
 
     private PriorityModel determinePriority(int totalSumWeight) {
-        if (totalSumWeight >= 16) {
-            return priorityRepository.findByDescription("Emergência");
-        } else if (totalSumWeight >= 11) {
-            return priorityRepository.findByDescription("Urgência");
-        } else if (totalSumWeight >= 6) {
-            return priorityRepository.findByDescription("Pouca Urgência");
+        PriorityModel priority;
+        if (totalSumWeight >= 15) {
+            priority = priorityRepository.findByDescription("Emergência");
+        } else if (totalSumWeight >= 10) {
+            priority = priorityRepository.findByDescription("Urgência");
+        } else if (totalSumWeight >= 5) {
+            priority = priorityRepository.findByDescription("Pouca Urgência");
         } else {
-            return priorityRepository.findByDescription("Não Urgente");
+            priority = priorityRepository.findByDescription("Não Urgente");
         }
+
+        if (priority == null) {
+            throw new RuntimeException("Priority not found for description with totalSumWeight: " + totalSumWeight);
+        }
+
+        return priority;
     }
 }

@@ -9,7 +9,7 @@ INSERT INTO tb_symptom (uuid, name, weight) VALUES
     ('213b3269-4196-4da3-b7e6-6a6c4195f32c', 'Dor muscular generalizada', 5),
     ('036506d1-02c8-40b5-94bb-eb0d7a9c1052', 'Dor de cabeça', 5),
     ('78d56b12-891e-4183-a0a1-e651cbb19d9d', 'Garganta inflamada', 5),
-    ('4148baec-7e28-4cb4-b303-7d72b44eacf5', 'Coriza ou nariz entupido', 5),
+    ('4148baec-7e28-4cb4-b303-7d72b44eacf5', 'Coriza ou nariz entupido', 3),
     ('e4cde92b-73bc-4978-891d-f8d5af92132c', 'diarreia', 5),
      ('2c3a15f6-51b6-4c1d-a52d-d4c49e3d04fa', 'Falta de ar', 5),
     ('1f9d5f76-2f88-4cbb-9f50-292f84ebcda4', 'Dor no peito', 5),
@@ -36,11 +36,11 @@ INSERT INTO tb_symptom (uuid, name, weight) VALUES
     ('7f2c4f45-3f7e-45a7-bb27-23f6dc31248b', 'Pele amarelada', 4),
     ('a6f98217-2f53-4e77-9df0-35695e7683ef', 'Inchaço nas pernas', 4);
 
-INSERT INTO tb_priority (color, description) VALUES
-    ('Vermelho', 'Emergência - atendimento imediato'),
-    ('Amarelo', 'Urgência - atendimento o mais rápido possível'),
-    ('Verde', 'Pouco Urgente'),
-    ('Azul', 'Não Urgente - Horário de chegada');
+INSERT INTO tb_priority (id, color, description) VALUES
+    (1, 'Vermelho', 'Emergência'),
+    (2, 'Amarelo', 'Urgência'),
+    (3, 'Verde', 'Pouca Urgência'),
+    (4, 'Azul', 'Não Urgente');
 
 INSERT INTO tb_address (id, first_line, house_number, residence_type, second_line, city, state, postal_code) VALUES
     ('9107b0e2-ef0a-4d11-a7d8-bb7d5010545a', 'Rua Doutor Carlos Agra', '200', 'Apartamento', 'Centro', 'Campina Grande', 'PB', '58400-204'),
