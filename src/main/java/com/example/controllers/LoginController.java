@@ -23,12 +23,20 @@ import com.example.repositories.AttendantRepository;
 
 import jakarta.validation.Valid;
 
+/**
+ * Controlador que lida com as operações de login.
+ */
 @Controller
 @RequestMapping("/")
 public class LoginController {
     @Autowired
     AttendantRepository attendantRepository;
 
+    /**
+     * Exibe o formulário
+     *
+     * @return o caminho para a visualização da página do login
+     */
     @GetMapping("/login")
     public String loginForm(Model context) {
         context.addAttribute("user", new AttendantModel());
@@ -44,6 +52,12 @@ public class LoginController {
         return "redirect:dashboard";
     }
 
+    /**
+     * Lida com asexceções 
+     *
+     *
+     * @return volta para a página de login com  erro
+     */
     @ResponseStatus(HttpStatus.BAD_REQUEST)
     @ExceptionHandler(MethodArgumentNotValidException.class)
     public String handleValidationExceptions(MethodArgumentNotValidException ex) {

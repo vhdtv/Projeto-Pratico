@@ -1,9 +1,11 @@
 <!DOCTYPE html>
 <html lang="en" class="w-100 h-100">
+
 <head>
     <div th:replace="fragments/head :: common"></div>
     <title>Dashboard</title>
 </head>
+
 <body class="w-100 h-100">
     <div th:replace="fragments/header :: profile"></div>
     <section class="d-flex gap-2 w-100 h-100">
@@ -12,27 +14,31 @@
         <main class="flex-grow-1 overflow-y-auto justify-content-center row p-0 pt-5 m-0 align-self-start">
             <section class="row m-0 mb-3">
                 <div class="col-6 col-md-4 col-lg-3 p-2">
-                    <div class="bg-white shadow-sm rounded-2 p-3 text-center h-100 w-100 d-flex flex-column align-items-center justify-content-center">
+                    <div
+                        class="bg-white shadow-sm rounded-2 p-3 text-center h-100 w-100 d-flex flex-column align-items-center justify-content-center">
                         <span class="small text-muted">Total de Pacientes</span>
                         <span class="fw-bold fs-4" th:text="${totalPatients}"></span>
                     </div>
                 </div>
                 <div class="col-6 col-md-4 col-lg-3 p-2">
-                    <div class="bg-white shadow-sm rounded-2 p-3 text-center h-100 w-100 d-flex flex-column align-items-center justify-content-center">
+                    <div
+                        class="bg-white shadow-sm rounded-2 p-3 text-center h-100 w-100 d-flex flex-column align-items-center justify-content-center">
                         <span class="small text-muted">Total de Prioridade Alta</span>
                         <span class="fw-bold fs-4" th:text="${totalHighPriorityPatients}"></span>
                     </div>
                 </div>
                 <div class="col-6 col-md-4 col-lg-3 p-2">
-                    <div class="bg-white shadow-sm rounded-2 p-3 text-center h-100 w-100 d-flex flex-column align-items-center justify-content-center">
+                    <div
+                        class="bg-white shadow-sm rounded-2 p-3 text-center h-100 w-100 d-flex flex-column align-items-center justify-content-center">
                         <span class="small text-muted">Tempo médio de espera</span>
-                        <span class="fw-bold fs-4">1H 25min</span>
+                        <span class="fw-bold fs-4" th:text="${averageTime}"></span>
                     </div>
                 </div>
                 <div class="col-6 col-md-4 col-lg-3 p-2">
-                    <div class="bg-white shadow-sm rounded-2 p-3 text-center h-100 w-100 d-flex flex-column align-items-center justify-content-center">
+                    <div
+                        class="bg-white shadow-sm rounded-2 p-3 text-center h-100 w-100 d-flex flex-column align-items-center justify-content-center">
                         <span class="small text-muted">Sintoma em Alta</span>
-                        <span class="fw-bold fs-4">Gripe</span>
+                        <span class="fw-bold fs-4" th:text="${highSymptom}"></span>
                     </div>
                 </div>
             </section>
@@ -73,7 +79,8 @@
                             </td>
                             <td>
                                 <div class="d-flex gap-1">
-                                    <span th:each="symptom, iStatSymptom : ${register.symptoms}" th:text="${symptom.name + ', '}"></span>
+                                    <span th:each="symptom, iStatSymptom : ${register.symptoms}"
+                                        th:text="${symptom.name + ', '}"></span>
                                 </div>
                             </td>
                         </tr>
@@ -83,4 +90,5 @@
         </main>
     </section>
 </body>
+
 </html>
