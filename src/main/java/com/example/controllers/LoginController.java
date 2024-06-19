@@ -1,9 +1,9 @@
 package com.example.controllers;
 
 import java.util.HashMap;
+import java.util.Map;
 import java.util.Optional;
 
-import java.util.Map;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Controller;
@@ -21,6 +21,7 @@ import com.example.dto.LoginRecordDto;
 import com.example.models.AttendantModel;
 import com.example.repositories.AttendantRepository;
 
+import jakarta.servlet.http.HttpSession;
 import jakarta.validation.Valid;
 
 @Controller
@@ -36,23 +37,24 @@ public class LoginController {
     }
 
     @PostMapping("/login")
-    public String loginAction(@Valid @ModelAttribute("user") LoginRecordDto loginRecordDto) {
-        Optional<AttendantModel> user = this.attendantRepository.findByEmailAndPassword(loginRecordDto.email(),
-                loginRecordDto.password());
-        if (user.isEmpty())
+    public String loginAction(@Valid @ModelAttribute("user") LoginRecordDto loginRecordDto, HttpSession session) {
+        Optional<AttendantModel> user = this.attendantRepository.findByEmailAndPassword(loginRecordDto.email(), loginRecordDto.password());
+        if (user.isEmpty()) {
             return "redirect:login";
+        }
+        user.ifPresent(attendant -> session.setAttribute("pacienteNome", attendant.getName()));
         return "redirect:dashboard";
-    }
-
+    } 
     @ResponseStatus(HttpStatus.BAD_REQUEST)
     @ExceptionHandler(MethodArgumentNotValidException.class)
-    public Map<String, String> handleValidationExceptions(MethodArgumentNotValidException ex) {
+    public String handleValidationExceptions(MethodArgumentNotValidException ex) {
         Map<String, String> errors = new HashMap<>();
         ex.getBindingResult().getAllErrors().forEach((error) -> {
             String fieldName = ((FieldError) error).getField();
             String errorMessage = error.getDefaultMessage();
             errors.put(fieldName, errorMessage);
         });
-        return errors;
+        
+        return "redirect:dashboard";
     }
 }
