@@ -1,23 +1,14 @@
-package com.example.controllers.api;
+package com.example.services;
 
 import java.sql.Date;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.UUID;
 
-import java.util.Map;
 import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.boot.autoconfigure.amqp.RabbitConnectionDetails.Address;
-import org.springframework.http.HttpStatus;
-import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.PatchMapping;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.stereotype.Service;
 
-import com.example.dto.AddressRecordDto;
 import com.example.dto.PatientPatchRecordDto;
 import com.example.dto.PatientRecordDto;
 import com.example.models.AddressModel;
@@ -27,10 +18,8 @@ import com.example.repositories.AddressRepository;
 import com.example.repositories.GenreRepository;
 import com.example.repositories.PatientRepository;
 
-import jakarta.validation.Valid;
-
-@RestController
-public class PatientController {
+@Service
+public class PatientService {
     @Autowired
     PatientRepository patientRepository;
     @Autowired
@@ -38,13 +27,12 @@ public class PatientController {
     @Autowired
     AddressRepository addressRepository;
 
-    @PostMapping("/patient")
-    public ResponseEntity<PatientModel> save(@RequestBody @Valid PatientRecordDto patientRecordDto) {
+    public PatientModel save(PatientRecordDto patientRecordDto) {
         PatientModel patientModel = new PatientModel();
         BeanUtils.copyProperties(patientRecordDto, patientModel);
 
         patientModel.setBirthday(this.generateBirthdayValue(patientRecordDto.birthday()));
-        GenreModel genre = genreRepository.findById(patientRecordDto.genre()).orElse(null);
+        GenreModel genre = genreRepository.findById(patientRecordDto.genre().getId()).orElse(null);
         if (genre == null)
             throw new Error("Genre was not found, received: " + patientRecordDto.genre());
         patientModel.setGenre(genre);
@@ -53,13 +41,10 @@ public class PatientController {
             BeanUtils.copyProperties(patientRecordDto.address().get(), patientAddress);
             patientModel.setId_address(patientAddress);
         }
-
-        return ResponseEntity.status(HttpStatus.CREATED).body(patientRepository.save(patientModel));
+        return patientRepository.save(patientModel);
     }
 
-    @PatchMapping("/patient/{id}")
-    public ResponseEntity<?> patch(@PathVariable("id") UUID uuid,
-            @RequestBody PatientPatchRecordDto updates) {
+    public PatientModel patch(UUID uuid, PatientPatchRecordDto updates) {
         PatientModel patient = patientRepository.findById(uuid).orElse(null);
         if (null == patient)
             throw new Error("Patient was not found(error-number-" + uuid + ")");
@@ -87,10 +72,10 @@ public class PatientController {
         if (!updates.email().isEmpty()) {
             patient.setEmail(updates.email().get());
         }
-        return ResponseEntity.status(HttpStatus.OK).body(patientRepository.save(patient));
+        return patientRepository.save(patient);
     }
 
-    private Date generateBirthdayValue(String inputDate) {
+    public static Date generateBirthdayValue(String inputDate) {
         SimpleDateFormat dateFormatter = new SimpleDateFormat("dd/MM/yyyy");
         java.util.Date date = new java.util.Date();
         try {

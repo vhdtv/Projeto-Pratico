@@ -22,11 +22,65 @@ public class PatientXrefSymptomModel implements Serializable {
 
     private String annotations;
     private int intensity;
-    private int average_days;
+    private int averageDays;
 
     @ManyToOne
     @JoinColumn(name = "attendance_registration_id", nullable = false)
-    private ReportModel attendance_registration;
+    private ReportModel attendanceRegistration;
 
-    // Getters and Setters
+    public UUID getUuid() {
+        return uuid;
+    }
+
+    public void setUuid(UUID uuid) {
+        this.uuid = uuid;
+    }
+
+    public SymptomModel getSymptom() {
+        return symptom;
+    }
+
+    public void setSymptom(SymptomModel symptom) {
+        this.symptom = symptom;
+    }
+
+    public PatientModel getPatient() {
+        return patient;
+    }
+
+    public void setPatient(PatientModel patient) {
+        this.patient = patient;
+    }
+
+    public String getAnnotations() {
+        return annotations;
+    }
+
+    public void setAnnotations(String annotations) {
+        this.annotations = annotations;
+    }
+
+    public int getIntensity() {
+        return intensity;
+    }
+
+    public void setIntensity(int intensity) {
+        this.intensity = intensity;
+    }
+
+    public int getAverageDays() {
+        return averageDays;
+    }
+
+    public void setAverageDays(int averageDays) {
+        this.averageDays = averageDays;
+    }
+
+    public ReportModel getAttendanceRegistration() {
+        return attendanceRegistration;
+    }
+
+    public void setAttendanceRegistration(ReportModel attendanceRegistration) {
+        this.attendanceRegistration = attendanceRegistration;
+    }
 }

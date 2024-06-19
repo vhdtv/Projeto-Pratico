@@ -10,7 +10,6 @@ import java.util.UUID;
 public class SymptomModel implements Serializable {
     @Id
     @Column(unique = true)
-    @GeneratedValue(strategy = GenerationType.AUTO)
     private UUID uuid;
     private String name;
     private int weight;
@@ -23,6 +22,10 @@ public class SymptomModel implements Serializable {
 
     public void setReports(Set<ReportXrefSymptomsModel> reports) {
         this.reports = reports;
+    }
+
+    public void addReport(ReportXrefSymptomsModel report) {
+        this.reports.add(report);
     }
 
     public UUID getUuid() {
