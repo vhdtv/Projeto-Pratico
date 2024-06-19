@@ -24,12 +24,20 @@ import com.example.repositories.AttendantRepository;
 import jakarta.servlet.http.HttpSession;
 import jakarta.validation.Valid;
 
+/**
+ * Controlador que lida com as operações de login.
+ */
 @Controller
 @RequestMapping("/")
 public class LoginController {
     @Autowired
     AttendantRepository attendantRepository;
 
+    /**
+     * Exibe o formulário
+     *
+     * @return o caminho para a visualização da página do login
+     */
     @GetMapping("/login")
     public String loginForm(Model context) {
         context.addAttribute("user", new AttendantModel());
@@ -38,13 +46,21 @@ public class LoginController {
 
     @PostMapping("/login")
     public String loginAction(@Valid @ModelAttribute("user") LoginRecordDto loginRecordDto, HttpSession session) {
-        Optional<AttendantModel> user = this.attendantRepository.findByEmailAndPassword(loginRecordDto.email(), loginRecordDto.password());
+        Optional<AttendantModel> user = this.attendantRepository.findByEmailAndPassword(loginRecordDto.email(),
+                loginRecordDto.password());
         if (user.isEmpty()) {
             return "redirect:login";
         }
         user.ifPresent(attendant -> session.setAttribute("pacienteNome", attendant.getName()));
         return "redirect:dashboard";
-    } 
+    }
+
+    /**
+     * Lida com as exceções
+     *
+     *
+     * @return volta para a página de login com erro
+     */
     @ResponseStatus(HttpStatus.BAD_REQUEST)
     @ExceptionHandler(MethodArgumentNotValidException.class)
     public String handleValidationExceptions(MethodArgumentNotValidException ex) {
@@ -54,7 +70,7 @@ public class LoginController {
             String errorMessage = error.getDefaultMessage();
             errors.put(fieldName, errorMessage);
         });
-        
+
         return "redirect:dashboard";
     }
 }
