@@ -14,7 +14,6 @@ import java.util.UUID;
 public class ReportModel implements Serializable, Comparable<ReportModel> {
     @Id
     @Column(unique = true)
-    @GeneratedValue(strategy = GenerationType.AUTO)
     private UUID uuid;
 
     @ManyToOne
@@ -140,5 +139,10 @@ public class ReportModel implements Serializable, Comparable<ReportModel> {
         refValues.put("Pouca Urgência", 3);
         refValues.put("Não Urgente", 4);
         return refValues.get(this.getPriority().getDescription());
+    }
+
+    public ReportModel() {
+        super();
+        this.uuid = UUID.randomUUID();
     }
 }

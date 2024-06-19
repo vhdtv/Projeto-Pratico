@@ -2,9 +2,12 @@ package com.example.controllers;
 
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.HashMap;
+import java.util.HashSet;
 import java.util.List;
 import java.util.Map;
+import java.util.Set;
 
 import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -22,14 +25,22 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 
 import com.example.dto.PatientCreationDto;
-import com.example.dto.PatientRecordDto;
 import com.example.dto.SymptomXrefHandlerDto;
 import com.example.models.PatientModel;
+import com.example.models.PatientXrefSymptomModel;
+import com.example.models.PriorityModel;
+import com.example.models.ReportModel;
+import com.example.models.ReportXrefSymptomsModel;
+import com.example.models.SymptomModel;
 import com.example.repositories.AttendanceRegistrationRepository;
+import com.example.repositories.AttendantRepository;
 import com.example.repositories.GenreRepository;
 import com.example.repositories.PatientRepository;
+import com.example.repositories.PatientXrefSymptomRepository;
+import com.example.repositories.PriorityRepository;
+import com.example.repositories.ReportRepository;
+import com.example.repositories.ReportXrefSymptomRepository;
 import com.example.repositories.SymptomRepository;
-import com.example.services.PatientService;
 
 import jakarta.validation.Valid;
 
@@ -44,6 +55,16 @@ public class PatientController {
     AttendanceRegistrationRepository attendanceRegistrationRepository;
     @Autowired
     SymptomRepository symptomRepository;
+    @Autowired
+    PatientXrefSymptomRepository patientXrefSymptomRepository;
+    @Autowired
+    ReportXrefSymptomRepository ReportXrefSymptomRepository;
+    @Autowired
+    ReportRepository reportRepository;
+    @Autowired
+    PriorityRepository priorityRepository;
+    @Autowired
+    AttendantRepository attendantRepository;
 
     @GetMapping({ "/list", "/list/" })
     public String list(Model context) {
@@ -78,14 +99,47 @@ public class PatientController {
     }
 
     @PostMapping({ "/", "" })
-    public void add(@Valid @RequestBody @ModelAttribute("patientRecordDto") PatientCreationDto patientCreationDto) {
-        // PatientModel patient = new PatientModel();
-        // patient.setBirthday(PatientService.generateBirthdayValue(patientCreationDto.getBirthday()));
-        // patient.setEmail(patientCreationDto.getEmail());
-        // patient.setFatherName(patientCreationDto.getFatherName());
-        // patient.setPhoneNumber(patientCreationDto.getPhoneNumber());
+    public String add(@Valid @RequestBody @ModelAttribute("patientRecordDto") PatientCreationDto patientCreationDto) {
+        /** Patient save */
+        PatientModel patient = new PatientModel();
+        BeanUtils.copyProperties(patientCreationDto.getPatient(), patient);
+        patient.setBirthday(patientCreationDto.getPatient().getBirthday());
+        this.patientRepository.saveAndFlush(patient);
+        /** Report save */
+        ReportModel report = new ReportModel();
+        report.setAttendant(this.attendantRepository.findByUsername("pietra_aurora_rebeca_mendes").get());
+        report.setCreatedAt(new Date());
+        report.setPatient(patient);
 
-        // System.out.println();
+        Set<ReportXrefSymptomsModel> reportSymptoms = new HashSet<ReportXrefSymptomsModel>();
+        Set<PatientXrefSymptomModel> patientSymptoms = new HashSet<PatientXrefSymptomModel>();
+        ArrayList<SymptomModel> symptoms = new ArrayList<>();
+        for (SymptomXrefHandlerDto symptomData : patientCreationDto.getXSymptoms()) {
+            SymptomModel symptom = symptomData.getSymptomModel();
+            symptoms.add(symptom);
+
+            /** First save */
+            PatientXrefSymptomModel patientXrefSymptom = new PatientXrefSymptomModel();
+            patientXrefSymptom.setAnnotations(symptomData.getAnnotations().orElse(null));
+            patientXrefSymptom.setAttendanceRegistration(report);
+            if (symptomData.getAverageDays().isPresent())
+                patientXrefSymptom.setAverageDays(symptomData.getAverageDays().get());
+            if (symptomData.getIntensity().isPresent())
+                patientXrefSymptom.setIntensity(symptomData.getIntensity().get());
+            patientXrefSymptom.setPatient(patient);
+            patientXrefSymptom.setSymptom(symptom);
+            patientSymptoms.add(patientXrefSymptom);
+        }
+        report.setPriority(this.calculatePriority(symptoms));
+        report.setSymptoms(reportSymptoms);
+        report = this.reportRepository.saveAndFlush(report);
+        for (SymptomModel symptom : symptoms)
+            this.symptomRepository.saveAndFlush(symptom);
+        for (PatientXrefSymptomModel symptomData : patientSymptoms) {
+            symptomData.setAttendanceRegistration(report);
+            this.patientXrefSymptomRepository.saveAndFlush(symptomData);
+        }
+        return "redirect:/patient/list";
     }
 
     @ExceptionHandler(MethodArgumentNotValidException.class)
@@ -97,5 +151,21 @@ public class PatientController {
             errors.put(fieldName, errorMessage);
         });
         return new ResponseEntity<>(errors, HttpStatus.BAD_REQUEST);
+    }
+
+    private PriorityModel calculatePriority(List<SymptomModel> symptoms) {
+        PriorityModel priority = this.priorityRepository.findById(1).get();
+        int totalScore = 0;
+        for (SymptomModel s : symptoms)
+            totalScore += s.getWeight();
+
+        if (totalScore < 5)
+            priority = this.priorityRepository.findById(2).get();
+        else if (totalScore < 7)
+            priority = this.priorityRepository.findById(3).get();
+        else if (totalScore < 8)
+            priority = this.priorityRepository.findById(4).get();
+
+        return priority;
     }
 }

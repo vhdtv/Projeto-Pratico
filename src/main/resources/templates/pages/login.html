@@ -22,7 +22,7 @@
             </div>
             <form th:action="@{/login}"  th:object="${user}" method="post" accept=""  >
                 <input type="text" th:field="*{email}" name="nome" placeholder="Insira seu email" autofocus>
-                <input type="text" th:field="*{password}" placeholder="Insira sua senha">
+                <input type="password" th:field="*{password}" placeholder="Insira sua senha">
                 <input type="submit" value="entrar">
             </form>
         </div>
