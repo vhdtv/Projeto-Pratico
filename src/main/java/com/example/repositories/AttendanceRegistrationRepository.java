@@ -1,5 +1,6 @@
 package com.example.repositories;
 
+import java.util.Date;
 import java.util.List;
 import java.util.UUID;
 
@@ -15,4 +16,6 @@ public interface AttendanceRegistrationRepository extends JpaRepository<ReportMo
     public List<ReportModel> findAllByPatient(PatientModel patient);
 
     public List<ReportModel> findAllByPriorityEquals(PriorityModel priorityModel);
+
+    public List<ReportModel> findAllByUpdatedAtEquals(Date date);
 }
