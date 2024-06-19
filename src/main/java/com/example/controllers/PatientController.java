@@ -99,12 +99,12 @@ public class PatientController {
     }
 
     @PostMapping({ "/", "" })
-    public void add(@Valid @RequestBody @ModelAttribute("patientRecordDto") PatientCreationDto patientCreationDto) {
+    public String add(@Valid @RequestBody @ModelAttribute("patientRecordDto") PatientCreationDto patientCreationDto) {
         /** Patient save */
         PatientModel patient = new PatientModel();
         BeanUtils.copyProperties(patientCreationDto.getPatient(), patient);
         patient.setBirthday(patientCreationDto.getPatient().getBirthday());
-        this.patientRepository.save(patient);
+        this.patientRepository.saveAndFlush(patient);
         /** Report save */
         ReportModel report = new ReportModel();
         report.setAttendant(this.attendantRepository.findByUsername("pietra_aurora_rebeca_mendes").get());
@@ -132,9 +132,14 @@ public class PatientController {
         }
         report.setPriority(this.calculatePriority(symptoms));
         report.setSymptoms(reportSymptoms);
-        this.reportRepository.save(report);
-        for (PatientXrefSymptomModel symptomData : patientSymptoms)
-            this.patientXrefSymptomRepository.save(symptomData);
+        report = this.reportRepository.saveAndFlush(report);
+        for (SymptomModel symptom : symptoms)
+            this.symptomRepository.saveAndFlush(symptom);
+        for (PatientXrefSymptomModel symptomData : patientSymptoms) {
+            symptomData.setAttendanceRegistration(report);
+            this.patientXrefSymptomRepository.saveAndFlush(symptomData);
+        }
+        return "redirect:/patient/list";
     }
 
     @ExceptionHandler(MethodArgumentNotValidException.class)

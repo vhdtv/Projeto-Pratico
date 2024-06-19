@@ -13,7 +13,6 @@ import java.util.UUID;
 public class ReportModel implements Serializable {
     @Id
     @Column(unique = true)
-    @GeneratedValue(strategy = GenerationType.AUTO)
     private UUID uuid;
 
     @ManyToOne
