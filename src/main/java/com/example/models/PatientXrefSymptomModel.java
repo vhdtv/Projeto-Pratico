@@ -30,11 +30,11 @@ public class PatientXrefSymptomModel implements Serializable {
 
     private String annotations;
     private int intensity;
-    private int average_days;
+    private int averageDays;
 
     @ManyToOne
     @JoinColumn(name = "attendance_registration_id", nullable = false)
-    private ReportModel attendance_registration;
+    private ReportModel attendanceRegistration;
 
     /**
      * Obtém o UUID único desta relação paciente-sintoma.
@@ -131,8 +131,8 @@ public class PatientXrefSymptomModel implements Serializable {
      * 
      * @return a média de dias de ocorrência
      */
-    public int getAverage_days() {
-        return average_days;
+    public int getAverageDays() {
+        return averageDays;
     }
 
     /**
@@ -140,8 +140,8 @@ public class PatientXrefSymptomModel implements Serializable {
      * 
      * @param average_days a média de dias de ocorrência a ser definida
      */
-    public void setAverage_days(int average_days) {
-        this.average_days = average_days;
+    public void setAverageDays(int averageDays) {
+        this.averageDays = averageDays;
     }
 
     /**
@@ -149,8 +149,8 @@ public class PatientXrefSymptomModel implements Serializable {
      * 
      * @return o relatório de atendimento associado
      */
-    public ReportModel getAttendance_registration() {
-        return attendance_registration;
+    public ReportModel getAttendanceRegistration() {
+        return attendanceRegistration;
     }
 
     /**
@@ -158,7 +158,7 @@ public class PatientXrefSymptomModel implements Serializable {
      * 
      * @param attendance_registration o relatório de atendimento a ser definido
      */
-    public void setAttendance_registration(ReportModel attendance_registration) {
-        this.attendance_registration = attendance_registration;
+    public void setAttendanceRegistration(ReportModel attendanceRegistration) {
+        this.attendanceRegistration = attendanceRegistration;
     }
 }

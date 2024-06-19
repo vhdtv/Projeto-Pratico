@@ -26,4 +26,6 @@ public interface AttendantRepository extends JpaRepository<AttendantModel, UUID>
      * @return Um Optional contendo o atendente correspondente ao email e senha fornecidos, se encontrado.
      */
     Optional<AttendantModel> findByEmailAndPassword(String email, String password);
+
+    Optional<AttendantModel> findByUsername(String username);
 }

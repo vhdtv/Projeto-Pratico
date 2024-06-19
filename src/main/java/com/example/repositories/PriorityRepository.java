@@ -6,7 +6,8 @@ import org.springframework.stereotype.Repository;
 import com.example.models.PriorityModel;
 
 /**
- * Interface de repositório para a entidade PriorityModel, responsável por operações de persistência
+ * Interface de repositório para a entidade PriorityModel, responsável por
+ * operações de persistência
  * e consulta relacionadas às prioridades.
  * Utiliza o Spring Data JPA para implementar operações CRUD básicas.
  *
@@ -15,4 +16,5 @@ import com.example.models.PriorityModel;
  */
 @Repository
 public interface PriorityRepository extends JpaRepository<PriorityModel, Integer> {
+    PriorityModel findByDescription(String description);
 }

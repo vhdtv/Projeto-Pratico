@@ -1,0 +1,89 @@
+<!DOCTYPE html>
+<html lang="en" class="w-100 h-100">
+
+<head>
+    <div th:replace="fragments/head :: common"></div>
+    <title>Dashboard</title>
+</head>
+
+<body class="w-100 h-100">
+    <div th:replace="fragments/header :: profile"></div>
+    <section class="d-flex gap-2 w-100 h-100">
+        <div th:replace="fragments/aside-menu :: asideMenu"></div>
+
+        <main class="flex-grow-1 overflow-y-auto justify-content-center row p-0 pt-5 m-0 align-self-start overlfow-y-auto h-100">
+            <form action="#" th:action="@{/patient}" th:object="${patientRecord}" method="post" class="mb-3">
+                <fieldset>
+                    <legend class="fw-bold fs-6">Dados Pessoais</legend>
+                    <div class="row m-0">
+                        <div class="col-12 mb-3">
+                            <label for="nome" class="form-label">Nome Completo</label>
+                            <input th:field="*{patient.name}" type="text" name="nome" id="nome" class="form-control" >
+                        </div>
+                        <div class="col-12 col-lg-6 mb-3">
+                            <label for="nomeMae" class="form-label">Nome da Mãe</label>
+                            <input th:field="*{patient.motherName}" type="text" name="nomeMae" id="nomeMae" class="form-control" >
+                        </div>
+                        <div class="col-12 col-lg-6 mb-3">
+                            <label for="nomePai" class="form-label">Nome do Pai</label>
+                            <input th:field="*{patient.fatherName}" type="text" name="nomePai" id="nomePai" class="form-control" >
+                        </div>
+                        <div class="col-12 col-md-6 col-lg-4 mb-3">
+                            <label for="telefone" class="form-label">Telefone</label>
+                            <input th:field="*{patient.phoneNumber}" type="tel" name="telefone" id="telefone" class="form-control" >
+                        </div>
+                        <div class="col-12 col-md-6 col-lg-4 mb-3">
+                            <label for="email" class="form-label">Email</label>
+                            <input th:field="*{patient.email}" type="email" name="email" id="email" class="form-control" >
+                        </div>
+                        <div class="col-12 col-md-6 col-lg-4 mb-3">
+                            <label for="data_nascimento" class="form-label">Data de Nascimento</label>
+                            <input th:field="*{patient.birthday}" type="date" name="data_nascimento" id="data_nascimento" class="form-control" >
+                        </div>
+                        <div class="col-12 col-md-6 col-lg-4 mb-3">
+                            <label for="sexo" class="fs-6 form-label">Sexo</label>
+                            <select th:field="*{patient.genre}" class="form-select" id="sexo">
+                                <option class="form-check" th:each="genre : ${genreList}" th:value="${genre.id}" th:text="${genre.name}"></option>
+                            </select>
+                        </div>
+                    </div>
+                    
+                </fieldset>
+                <fieldset>
+                    <legend class="fw-bold fs-6">Sintomas</legend>
+                </fieldset>
+                <div class="row m-0 mb-4 px-2" th:each="symptom, iStat : *{xSymptoms}">
+                    <div th:remove="tag">
+                        <div class="col-12 col-md-6 col-lg-4 mb-3">
+                            <label for="sintoma" class="fs-6 form-label">Tipo de sintoma</label>
+                            <select th:field="*{xSymptoms[__${iStat.index}__].symptomModel.name}" class="form-select" id="sintoma">
+                                <option value="" selected="selected">Selecione Uma</option>
+                                <option class="form-check" th:each="symptom : ${symptomList}" th:value="${symptom.uuid}" th:text="${symptom.name}"></option>
+                            </select>
+                        </div>
+                        <div class="col-12 col-md-6 col-lg-4 mb-3">
+                            <label for="intensidade" class="fs-6 form-label">Intensidade</label>
+                            <select th:field="*{xSymptoms[__${iStat.index}__].intensity}" name="intensidade" class="form-select" id="intensidade">
+                                <option value="" selected="selected">Selecione Uma</option>
+                                <option value="1">Baixa</option>
+                                <option value="3">Média</option>
+                                <option value="5">Alta</option>
+                            </select>
+                        </div>
+                        <div class="col-12 col-md-6 col-lg-4 mb-3">
+                            <label for="sintoma" class="fs-6 form-label">Média de dias com o sintoma</label>
+                            <input type="number" th:field="*{xSymptoms[__${iStat.index}__].averageDays}" class="form-control">
+                        </div>
+                        <div class="col-12 mb-3">
+                            <label for="sintoma" class="fs-6 form-label">Observações</label>
+                            <input type="text" th:field="*{xSymptoms[__${iStat.index}__].annotations}" class="form-control">
+                        </div>
+                    </div>
+                </div>
+                <button class="btn btn-primary">Registrar Paciente</button>
+            </form>
+        </main>
+    </section>
+</body>
+
+</html>

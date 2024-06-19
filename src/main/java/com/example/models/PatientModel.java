@@ -9,9 +9,13 @@ import java.util.UUID;
 /**
  * Uma classe que representa um Paciente.
  * Esta entidade é mapeada para a tabela "TB_PATIENTS" no banco de dados.
- * Cada paciente possui um UUID único, nome, nome da mãe, nome do pai, data de nascimento, gênero, comorbidades, endereço, número de telefone e email.
+ * Cada paciente possui um UUID único, nome, nome da mãe, nome do pai, data de
+ * nascimento, gênero, comorbidades, endereço, número de telefone e email.
  * 
- * <p>Exemplo de uso:</p>
+ * <p>
+ * Exemplo de uso:
+ * </p>
+ * 
  * <pre>
  * {@code
  * PatientModel paciente = new PatientModel();
@@ -174,12 +178,12 @@ public class PatientModel implements Serializable {
     }
 
     /**
-     * Obtém o nome do gênero do paciente.
+     * Obtém o gênero do paciente.
      * 
-     * @return o nome do gênero do paciente
+     * @return o gênero do paciente
      */
-    public String getGenre() {
-        return this.genre.getName();
+    public GenreModel getGenre() {
+        return this.genre;
     }
 
     /**

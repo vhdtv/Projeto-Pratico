@@ -8,7 +8,8 @@ import java.util.UUID;
 /**
  * Classe que representa um sintoma em um sistema de gestão de saúde.
  * Cada instância desta classe contém informações sobre um sintoma específico,
- * incluindo nome, peso (importância relativa) e os relatórios que mencionam este sintoma.
+ * incluindo nome, peso (importância relativa) e os relatórios que mencionam
+ * este sintoma.
  * 
  * @version 1.0
  * @since 2024-06-18
@@ -18,7 +19,6 @@ import java.util.UUID;
 public class SymptomModel implements Serializable {
     @Id
     @Column(unique = true)
-    @GeneratedValue(strategy = GenerationType.AUTO)
     private UUID uuid;
 
     @Column(length = 100)
@@ -52,8 +52,13 @@ public class SymptomModel implements Serializable {
      * 
      * @return o UUID do sintoma
      */
+
     public UUID getUuid() {
         return uuid;
+    }
+
+    public void addReport(ReportXrefSymptomsModel report) {
+        this.reports.add(report);
     }
 
     /**

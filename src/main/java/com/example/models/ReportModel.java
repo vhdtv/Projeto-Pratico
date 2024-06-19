@@ -4,6 +4,7 @@ import jakarta.persistence.*;
 import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.Date;
+import java.util.HashMap;
 import java.util.List;
 import java.util.Set;
 import java.util.UUID;
@@ -11,10 +12,15 @@ import java.util.UUID;
 /**
  * Classe que representa um relatório.
  * Esta entidade é mapeada para a tabela "tb_report" no banco de dados.
- * Cada relatório possui um UUID único, um paciente, um atendente, uma prioridade,
- * uma lista de sintomas, data de criação, data de atualização, uma fila de serviço e anotações.
+ * Cada relatório possui um UUID único, um paciente, um atendente, uma
+ * prioridade,
+ * uma lista de sintomas, data de criação, data de atualização, uma fila de
+ * serviço e anotações.
  * 
- * <p>Exemplo de uso:</p>
+ * <p>
+ * Exemplo de uso:
+ * </p>
+ * 
  * <pre>
  * {@code
  * ReportModel report = new ReportModel();
@@ -31,10 +37,9 @@ import java.util.UUID;
  */
 @Entity
 @Table(name = "tb_report")
-public class ReportModel implements Serializable {
+public class ReportModel implements Serializable, Comparable<ReportModel> {
     @Id
     @Column(unique = true)
-    @GeneratedValue(strategy = GenerationType.AUTO)
     private UUID uuid;
 
     @ManyToOne
@@ -53,9 +58,19 @@ public class ReportModel implements Serializable {
     @OrderBy("fk_symptom")
     private Set<ReportXrefSymptomsModel> symptoms;
 
-    private Date createdAt;
+    private Date createdAt; // entrada
 
-    private Date updatedAt;
+    private Date updatedAt; // saida
+
+    private int totalScore = 0;
+
+    public int getTotalScore() {
+        return totalScore;
+    }
+
+    public void setTotalScore(int totalScore) {
+        this.totalScore = totalScore;
+    }
 
     @OneToOne
     @JoinColumn(name = "queue_id", referencedColumnName = "id")
