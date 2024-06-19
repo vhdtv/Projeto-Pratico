@@ -4,13 +4,14 @@ import jakarta.persistence.*;
 import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.Date;
+import java.util.HashMap;
 import java.util.List;
 import java.util.Set;
 import java.util.UUID;
 
 @Entity
 @Table(name = "tb_report")
-public class ReportModel implements Serializable {
+public class ReportModel implements Serializable, Comparable<ReportModel> {
     @Id
     @Column(unique = true)
     @GeneratedValue(strategy = GenerationType.AUTO)
@@ -32,9 +33,19 @@ public class ReportModel implements Serializable {
     @OrderBy("fk_symptom")
     private Set<ReportXrefSymptomsModel> symptoms;
 
-    private Date createdAt;  //entrada
+    private Date createdAt; // entrada
 
-    private Date updatedAt; //saida
+    private Date updatedAt; // saida
+
+    private int totalScore = 0;
+
+    public int getTotalScore() {
+        return totalScore;
+    }
+
+    public void setTotalScore(int totalScore) {
+        this.totalScore = totalScore;
+    }
 
     @OneToOne
     @JoinColumn(name = "queue_id", referencedColumnName = "id")
@@ -115,5 +126,19 @@ public class ReportModel implements Serializable {
 
     public void setQueue(ServiceQueueModel queue) {
         this.queue = queue;
+    }
+
+    @Override
+    public int compareTo(ReportModel o) {
+        return Integer.compare(o.getTotalScore(), this.getTotalScore());
+    }
+
+    public int getPriorityValue() {
+        HashMap<String, Integer> refValues = new HashMap<>();
+        refValues.put("Emergência", 1);
+        refValues.put("Urgência", 2);
+        refValues.put("Pouca Urgência", 3);
+        refValues.put("Não Urgente", 4);
+        return refValues.get(this.getPriority().getDescription());
     }
 }

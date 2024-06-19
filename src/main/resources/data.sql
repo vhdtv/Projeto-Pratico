@@ -11,7 +11,7 @@ INSERT INTO tb_symptom (uuid, name, weight) VALUES
     ('78d56b12-891e-4183-a0a1-e651cbb19d9d', 'Garganta inflamada', 5),
     ('4148baec-7e28-4cb4-b303-7d72b44eacf5', 'Coriza ou nariz entupido', 3),
     ('e4cde92b-73bc-4978-891d-f8d5af92132c', 'diarreia', 5),
-     ('2c3a15f6-51b6-4c1d-a52d-d4c49e3d04fa', 'Falta de ar', 5),
+    ('2c3a15f6-51b6-4c1d-a52d-d4c49e3d04fa', 'Falta de ar', 5),
     ('1f9d5f76-2f88-4cbb-9f50-292f84ebcda4', 'Dor no peito', 5),
     ('b2e5b0e7-6a68-4cbe-8d71-d6a8f3a594b2', 'Confusão mental', 4),
     ('e8c3a489-f8cb-4d3e-95c8-2d3b9c58f6c8', 'Náusea', 3),
@@ -36,11 +36,11 @@ INSERT INTO tb_symptom (uuid, name, weight) VALUES
     ('7f2c4f45-3f7e-45a7-bb27-23f6dc31248b', 'Pele amarelada', 4),
     ('a6f98217-2f53-4e77-9df0-35695e7683ef', 'Inchaço nas pernas', 4);
 
-INSERT INTO tb_priority (id, color, description) VALUES
-    (1, 'Vermelho', 'Emergência'),
-    (2, 'Amarelo', 'Urgência'),
-    (3, 'Verde', 'Pouca Urgência'),
-    (4, 'Azul', 'Não Urgente');
+INSERT INTO tb_priority (color, description) VALUES
+    ('Vermelho', 'Emergência'),
+    ('Amarelo', 'Urgência'),
+    ('Verde', 'Pouca Urgência'),
+    ('Azul', 'Não Urgente');
 
 INSERT INTO tb_address (id, first_line, house_number, residence_type, second_line, city, state, postal_code) VALUES
     ('9107b0e2-ef0a-4d11-a7d8-bb7d5010545a', 'Rua Doutor Carlos Agra', '200', 'Apartamento', 'Centro', 'Campina Grande', 'PB', '58400-204'),
@@ -121,19 +121,29 @@ INSERT INTO TB_ATTENDANT (uuid, name, username, password, email, phone_number, s
     ('ee4b624b-dc87-4826-81f1-712cff6c1a72', 'Lívia Isabella Carvalho', 'lívia_isabella_carvalho', '1Ln2s40S2X', 'liviaisabellacarvalho@ozsurfing.com.br', '(69) 2745-2796', 'Pediatria'),
     ('cf09dc9d-a5d4-493e-a8dd-63455da61298', 'John Doe', 'johndoe', 'password123', 'john@example.com', '1234567890', 'Geral');
 
-INSERT INTO tb_report (uuid, annotations, fk_attendant, fk_patient, fk_priority, created_at, updated_at) VALUES
-    ('c35050ef-2a32-4670-9a2e-2d98aa91ae73', 'Sentindo sintomas a mais de 2 semanas', 'c25cef14-c78e-414c-964b-154c5043cba1', 'e7829deb-2014-42d5-bfe0-5fb5e6f7d906', 2, '2024-06-15 14:12:10' , null),
-    ('4bce0d1b-7a3a-4bbf-a6f4-d8f7bb1c5e6a', 'Apresenta sintomas por uma semana', 'a5835e44-d141-4930-9002-1af08f4ad6b6', '12f931dd-e427-4dd4-b869-852e1f73c891', 1, '2024-06-16 09:30:00', null),
-    ('7d2cde9e-957d-4a45-b64d-88d7c9a24fb3', 'Sente cansaço e febre alta', '1f3d616b-f0ff-4d1f-bd60-555c59740d2c', '692ac970-2202-442c-b30a-b47f29edfd33', 3, '2024-06-16 10:45:00', null),
-    ('f4c8c9e8-d1b7-4c45-8b46-cd8f9b6b9147', 'Dor muscular intensa e tosse seca', 'e7a77001-6e8c-40b8-ae16-bdad5c292fbc', '88201f48-c149-4898-80bb-292e200de241', 2, '2024-06-16 11:20:00', null),
-    ('0ab2c5f3-9a9e-4c32-b9c9-8a8c1a42c9f6', 'Garganta inflamada e dor de cabeça', '71a902e3-e60d-42fa-a954-798c02a513b6', 'ba7ed7c1-713c-4325-b9f7-0130ceaeea1c', 4, '2024-06-16 12:05:00', null),
-    ('5f9e8b6e-b8c4-4b6e-b6c8-d7f6b9c7a6e4', 'Coriza e nariz entupido há dois dias', '1c8877f9-9b07-4a6c-9368-82ccef03ef9c', 'fabc4539-0555-4a6e-925f-739c89423be4', 3, '2024-06-16 13:00:00', null);
+INSERT INTO tb_report (uuid, annotations, fk_attendant, fk_patient, fk_priority, created_at, updated_at, total_score) VALUES
+    ('c35050ef-2a32-4670-9a2e-2d98aa91ae73', 'Sentindo sintomas a mais de 2 semanas', 'c25cef14-c78e-414c-964b-154c5043cba1', 'e7829deb-2014-42d5-bfe0-5fb5e6f7d906', 2, '2024-06-15 14:12:10' , null, 1),
+    ('c36050ef-2a32-4670-9a2e-2d98aa91ae73', 'Sentindo sintomas a mais de 2 semanas', 'c25cef14-c78e-414c-964b-154c5043cba1', 'e7829deb-2014-42d5-bfe0-5fb5e6f7d906', 2, '2024-06-15 14:12:10' , null, 1),
+
+    ('4bce0d1b-7a3a-4bbf-a6f4-d8f7bb1c5e6a', 'Apresenta sintomas por uma semana', 'a5835e44-d141-4930-9002-1af08f4ad6b6', '12f931dd-e427-4dd4-b869-852e1f73c891', 1, '2024-06-16 09:30:00', null, 1),
+    ('7d2cde9e-957d-4a45-b64d-88d7c9a24fb3', 'Sente cansaço e febre alta', '1f3d616b-f0ff-4d1f-bd60-555c59740d2c', '692ac970-2202-442c-b30a-b47f29edfd33', 3, '2024-06-16 10:45:00', null, 12),
+    ('f4c8c9e8-d1b7-4c45-8b46-cd8f9b6b9147', 'Dor muscular intensa e tosse seca', 'e7a77001-6e8c-40b8-ae16-bdad5c292fbc', '88201f48-c149-4898-80bb-292e200de241', 2, '2024-06-16 11:20:00', null, 1),
+    ('0ab2c5f3-9a9e-4c32-b9c9-8a8c1a42c9f6', 'Garganta inflamada e dor de cabeça', '71a902e3-e60d-42fa-a954-798c02a513b6', 'ba7ed7c1-713c-4325-b9f7-0130ceaeea1c', 4, '2024-06-16 12:05:00', null, 1),
+    ('5f9e8b6e-b8c4-4b6e-b6c8-d7f6b9c7a6e4', 'Coriza e nariz entupido há dois dias', '1c8877f9-9b07-4a6c-9368-82ccef03ef9c', 'fabc4539-0555-4a6e-925f-739c89423be4', 3, '2024-06-16 13:00:00', null, 20);
 
 INSERT INTO tb_report_xref_symptom (fk_report, fk_symptom) VALUES
     ('c35050ef-2a32-4670-9a2e-2d98aa91ae73', 'b5b45059-5a8b-4916-96cb-f9cd254e5d30'),
     ('c35050ef-2a32-4670-9a2e-2d98aa91ae73', '54dfd081-c144-455e-b71f-b93f36c94850'),
     ('c35050ef-2a32-4670-9a2e-2d98aa91ae73', '213b3269-4196-4da3-b7e6-6a6c4195f32c'),
     ('c35050ef-2a32-4670-9a2e-2d98aa91ae73', '4148baec-7e28-4cb4-b303-7d72b44eacf5'),
+
+    ('c36050ef-2a32-4670-9a2e-2d98aa91ae73', 'b5b45059-5a8b-4916-96cb-f9cd254e5d30'),
+    ('c36050ef-2a32-4670-9a2e-2d98aa91ae73', '54dfd081-c144-455e-b71f-b93f36c94850'),
+    ('c36050ef-2a32-4670-9a2e-2d98aa91ae73', '213b3269-4196-4da3-b7e6-6a6c4195f32c'),
+    ('c36050ef-2a32-4670-9a2e-2d98aa91ae73', '4148baec-7e28-4cb4-b303-7d72b44eacf5'),
+    ('c36050ef-2a32-4670-9a2e-2d98aa91ae73', '4148baec-7e28-4cb4-b303-7d72b44eacf5'),
+
+
     ('4bce0d1b-7a3a-4bbf-a6f4-d8f7bb1c5e6a', '54dfd081-c144-455e-b71f-b93f36c94850'), -- Febre acima de 38ºC
     ('4bce0d1b-7a3a-4bbf-a6f4-d8f7bb1c5e6a', '213b3269-4196-4da3-b7e6-6a6c4195f32c'), -- Dor muscular generalizada
     ('7d2cde9e-957d-4a45-b64d-88d7c9a24fb3', '036506d1-02c8-40b5-94bb-eb0d7a9c1052'), -- Dor de cabeça
