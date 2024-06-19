@@ -84,8 +84,8 @@ public class PatientModel implements Serializable {
         this.genre = genre;
     }
 
-    public String getGenre() {
-        return this.genre.getName();
+    public GenreModel getGenre() {
+        return this.genre;
     }
 
     public void setId_address(AddressModel address) {

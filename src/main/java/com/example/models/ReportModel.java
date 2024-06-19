@@ -13,7 +13,6 @@ import java.util.UUID;
 public class ReportModel implements Serializable {
     @Id
     @Column(unique = true)
-    @GeneratedValue(strategy = GenerationType.AUTO)
     private UUID uuid;
 
     @ManyToOne
@@ -115,5 +114,10 @@ public class ReportModel implements Serializable {
 
     public void setQueue(ServiceQueueModel queue) {
         this.queue = queue;
+    }
+
+    public ReportModel() {
+        super();
+        this.uuid = UUID.randomUUID();
     }
 }

@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="en" class="w-100 h-100">
+<head>
+    <div th:replace="fragments/head :: common"></div>
+    <title>Dashboard</title>
+</head>
+<body class="w-100 h-100">
+    <div th:replace="fragments/header :: profile"></div>
+    <section class="d-flex gap-2 w-100 h-100">
+        <div th:replace="fragments/aside-menu :: asideMenu"></div>
+
+        <main class="flex-grow-1 overflow-y-auto justify-content-center row p-0 pt-5 m-0 align-self-start">
+            <section class="row m-0 mb-3">
+                <div class="d-flex mt-4 p-0 justify-content-between align-items-center mb-3">
+                    <h2 class="d-inline-block small m-0">Lista de Pacientes</h2>
+                    <a href="/patient/create" class="btn btn-sm btn-outline-primary" style="--bs-btn-font-size: .7rem">Registrar Paciente</a>
+                </div>
+                <table class="table" style="font-size: 12px;">
+                    <thead>
+                        <tr>
+                            <td>#</td>
+                            <td>Nome Paciente</td>
+                            <td>Data aniversário</td>
+                            <td>Nome da Mãe</td>
+                            <td>Nome do Pai</td>
+                            <td>Número de Atendimentos</td>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr th:each="patientHash, iStat : ${patientList}">
+                            <td th:text="${iStat.index+1}"></td>
+                            <td th:text="${patientHash.name}"></td>
+                            <td th:text="${patientHash.birthday}"></td>
+                            <td th:text="${patientHash.motherName}"></td>
+                            <td th:text="${patientHash.fatherName} ?: '-'"></td>
+                            <td th:text="${patientHash.attendanceCount}"></td>
+                        </tr>
+                    </tbody>
+                </table>
+            </section>
+        </main>
+    </section>
+</body>
+</html>
