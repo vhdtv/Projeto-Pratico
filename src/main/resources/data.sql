@@ -10,7 +10,26 @@ INSERT INTO tb_symptom (uuid, name, weight) VALUES
     ('036506d1-02c8-40b5-94bb-eb0d7a9c1052', 'Dor de cabeça', 5),
     ('78d56b12-891e-4183-a0a1-e651cbb19d9d', 'Garganta inflamada', 5),
     ('4148baec-7e28-4cb4-b303-7d72b44eacf5', 'Coriza ou nariz entupido', 5),
+    ('7fc8033c-0451-430e-a10e-9266a0d1c213', 'Comprometimento das vias aéreas', 3),
+    ('ec57d4ba-f835-4295-aaed-4337aa71d0fe', 'Respiração inadequada', 4),
+    ('b7601bda-23c1-4c1b-9c39-f03479fb1c1a', 'hemorragia Exsanguinante', 6),
+    ('c665502f-d64e-451f-8e0a-4e1635434c88', 'Choque', 4),
+    ('d90a0fb9-65cd-4be7-9d6c-cbb479830d8b', 'Convulsionando', 8),
+    ('6ea5b5ab-7489-4e53-856f-721052391656', 'Desidratação', 2),
+    ('25191348-60fd-45da-a03c-470d99c24874', 'Alteração da consciência', 7),
+    ('847cbc37-6fa3-467e-a05b-2c4e9db9bb6a', 'Tonteira', 6),
+    ('5b6e9dc0-48d3-420f-9d25-03a1c6e7f32b', 'Fratura', 2),
+    ('f89d4890-2a70-4333-8817-910d4df3df98', 'Vomito', 8),
+    ('17e1b8df-4579-4950-a785-daeb17b09ae5', 'Outro', 3),
     ('e4cde92b-73bc-4978-891d-f8d5af92132c', 'diarreia', 5);
+
+INSERT INTO tb_comorbidity (uuid, name, multiply_factor) VALUES
+    ('45a04e71-8e89-413f-bb11-54cf213c4817', 'Síndrome de Down', 2),
+    ('0ef79c9e-3c1a-4f15-be8f-958481a55fd1', 'Hipertensão', 3),
+    ('c42a908f-f87f-455f-8b78-47848c63f555', 'Diabetes', 4),
+    ('8fbea010-ee94-4695-9d37-6133736982ec', 'Cirrose Hepática', 4),
+    ('24f86196-f90a-4802-9e6b-3503813f823e', 'Doença Cerebrovascular', 4),
+    ('dd0e0e3a-692b-4edb-827a-25d69ed2d399', 'Insuficiência Cardíaca', 3);
 
 INSERT INTO tb_priority (color, description) VALUES
     ('Vermelho', 'Emergência - atendimento imediato'),
@@ -97,11 +116,183 @@ INSERT INTO TB_ATTENDANT (uuid, name, username, password, email, phone_number, s
     ('ee4b624b-dc87-4826-81f1-712cff6c1a72', 'Lívia Isabella Carvalho', 'lívia_isabella_carvalho', '1Ln2s40S2X', 'liviaisabellacarvalho@ozsurfing.com.br', '(69) 2745-2796', 'Pediatria'),
     ('cf09dc9d-a5d4-493e-a8dd-63455da61298', 'John Doe', 'johndoe', 'password123', 'john@example.com', '1234567890', 'Geral');
 
-INSERT INTO tb_report (uuid, annotations, fk_attendant, fk_patient, fk_priority, created_at, updated_at) VALUES
-    ('c35050ef-2a32-4670-9a2e-2d98aa91ae73', 'Sentindo sintomas a mais de 2 semanas', 'c25cef14-c78e-414c-964b-154c5043cba1', 'e7829deb-2014-42d5-bfe0-5fb5e6f7d906', 2, '2024-06-15 14:12:10' , '2024-06-15 15:17:10');
-
-INSERT INTO tb_report_xref_symptom (fk_report, fk_symptom) VALUES
+INSERT INTO tb_report (uuid, annotations, fk_attendant, fk_patient, fk_priority, created_at) VALUES
+    ('c35050ef-2a32-4670-9a2e-2d98aa91ae73','Sentindo sintomas a mais de 2 semanas', 'c25cef14-c78e-414c-964b-154c5043cba1', 'e7829deb-2014-42d5-bfe0-5fb5e6f7d906', 2, '2024-06-15 14:12:10'),
+    ('e2192631-1a5c-45c5-9f61-305c7b31fea3','', 'a5835e44-d141-4930-9002-1af08f4ad6b6', '12f931dd-e427-4dd4-b869-852e1f73c891', 2, '2024-06-15 23:12:10'),
+    ('ca4a8bfe-8fe6-497c-ba7c-2c593f05fec2','Sentinto sintomas a mais de 1 semana', '1f3d616b-f0ff-4d1f-bd60-555c59740d2c', '692ac970-2202-442c-b30a-b47f29edfd33', 2, '2024-06-15 14:30:10'),
+    ('939be18e-2187-431f-ab5d-b9ffb52c7e15','', 'e7a77001-6e8c-40b8-ae16-bdad5c292fbc', '88201f48-c149-4898-80bb-292e200de241', 2, '2024-06-15 20:12:10'),
+    ('4dd9dae8-fade-4716-9fca-1b01c5601b72','', '71a902e3-e60d-42fa-a954-798c02a513b6', 'ba7ed7c1-713c-4325-b9f7-0130ceaeea1c', 2, '2024-06-15 13:12:10'),
+    ('951cd71c-28de-4241-824e-278484ff3940','Sentinto sintomas a mais de 1 semanas', '1c8877f9-9b07-4a6c-9368-82ccef03ef9c', 'fabc4539-0555-4a6e-925f-739c89423be4', 1, '2024-06-15 23:15:40'),
+    ('3a792774-671f-4b78-8458-22dc89ff42a7','Sentinto sintomas a mais de 4 semanas', 'fbf2e550-fe7d-4856-a73a-bef840e120be', 'cba9e18f-14de-443b-8312-5448c19f31aa', 2, '2024-06-15 13:12:10'),         
+    ('ff07460a-dfed-46a0-8c00-3e713797baac','Sentinto sintomas a mais de 2 semanas', 'be2af9d2-56e0-4913-8e8d-7c0f0a4d7e0e', '9c1a6c96-fe29-408d-956a-53c864c5321b', 1, '2024-06-15 22:10:10'),         
+    ('d2190456-0abc-4f59-b967-7764a50f5721','', '4f26b825-a935-42ef-be19-aab772094a91', '90cc094a-67e1-4e58-b082-ba83e6e29eb3', 1, '2024-06-15 03:12:10'),         
+    ('b00a3f77-c927-4cb5-9b4d-2cded2612a5c','', 'b4f12683-7400-4596-9867-9bcecb39190b', 'bcdfa0ec-87dd-448d-bf52-25973276fe83', 2, '2024-06-15 23:03:10'),         
+    ('b62b8bc8-0741-49a4-8bc2-ab26ecdb83b7','Sentinto sintomas a mais de 1 semana', '6bcab158-30d4-4882-a899-87c0913ff6f2', '7e8048b5-ee61-4ed6-ad92-6f46a2b74c15', 2, '2024-06-15 19:10:10'),         
+    ('b249a94a-9986-4814-857d-0c2272762791','Sentinto sintomas a mais de 2 semanas', 'ee4b624b-dc87-4826-81f1-712cff6c1a72', '5ff8d290-d65a-411a-9561-5e9291956275', 1, '2024-06-15 23:00:10'),          
+    ('31d9ee4c-edf0-4759-8a50-6011446fc84c','Sentinto sintomas a mais de 1 semana', 'cf09dc9d-a5d4-493e-a8dd-63455da61298', '73b13213-d6ec-4fa1-be5f-5d35d2926b4e', 2, '2024-06-15 18:10:10'),         
+    ('d7dd2a61-3672-46cf-9f81-c258d09f5873','Sentinto sintomas a mais de 3 semanas', 'c25cef14-c78e-414c-964b-154c5043cba1', '47f532bb-6cf6-4b1b-a3da-da8c9babbba4', 1, '2024-06-29 23:00:10'),
+    ('43090799-6bfa-43cc-a1d7-ad584edfce1b','', 'a5835e44-d141-4930-9002-1af08f4ad6b6', 'd9fc9092-2b2a-4e0a-8009-04f256015da8', 1, '2024-06-29 11:00:10'),        
+    ('6ac358b5-7ad9-43ae-849e-f184afc5515f','Sentinto sintomas a mais de 3 semanas', '1f3d616b-f0ff-4d1f-bd60-555c59740d2c', '03ec7f2d-f60a-4b65-8fb1-f54b90f160a0', 1, '2024-06-29 12:12:12'),         
+    ('7432a806-c420-4521-af64-3a68558d2d05','Sentinto sintomas a mais de 1 semana', 'e7a77001-6e8c-40b8-ae16-bdad5c292fbc', '888aa525-9aec-4cd1-9dca-459e3a3a1860', 2, '2024-06-29 10:20:12'),   
+    ('5615ae40-b3b5-4861-bdd0-c9a2df2a4a0a','', '71a902e3-e60d-42fa-a954-798c02a513b6', 'bcae378c-c337-499e-a4ba-c9bcf462d6d2', 2, '2024-06-29 10:10:12'),   
+    ('f65512a8-0baa-4c4c-8a9d-360ca15355b3','Sentinto sintomas a mais de 3 semanas', '1c8877f9-9b07-4a6c-9368-82ccef03ef9c', 'f39783a9-1ff6-426b-8deb-e6fce6eecce9', 1, '2024-06-29 17:10:12'),                 
+    ('303a8a91-4c11-4d78-9bd0-07ab6463d8db','', 'fbf2e550-fe7d-4856-a73a-bef840e120be', '8147a158-61d1-4c4b-8c63-a98c15d0b5a5', 2, '2024-06-29 13:10:12'),   
+    ('d4cd3aa3-e4eb-497b-b4e0-263e2ce87c5a','Sentinto sintomas a mais de 3 semanas', 'be2af9d2-56e0-4913-8e8d-7c0f0a4d7e0e', 'a5e8cd90-7fdc-42de-9e5b-abeb771e9d51', 2, '2024-06-29 04:02:00'),   
+    ('f8571287-4772-41b5-97f7-c27bdc834d7f','', '4f26b825-a935-42ef-be19-aab772094a91', '9f309338-ae7a-481f-8690-4bbfa64f1df4', 2, '2024-06-29 14:02:00'),  
+    ('25373651-165b-4a46-8b18-d49d81a06cf4','Sentinto sintomas a mais de 1 semana', 'b4f12683-7400-4596-9867-9bcecb39190b', '0c2f0d0a-48f6-4dad-a5d6-cea5b406dbe1', 2, '2024-06-29 12:02:00'),                               
+    ('e0d4c260-6d60-424f-8452-f620b012acc5','Sentinto sintomas a mais de 2 semanas', '6bcab158-30d4-4882-a899-87c0913ff6f2', '0802aa05-165d-4c57-9527-0d4f01404efb', 2, '2024-06-29 11:02:00'),                                                                                     
+    ('d9cc1a80-f536-4def-af7c-41ea9050d625','Sentinto sintomas a mais de 2 semanas', 'ee4b624b-dc87-4826-81f1-712cff6c1a72', '223facfa-6511-4238-97d6-0e63ccc3b35d', 1, '2024-06-29 02:02:00'),  
+    ('108c43e4-be6c-4ea1-8feb-27be079b48a3','Sentinto sintomas a mais de 1 semana', 'cf09dc9d-a5d4-493e-a8dd-63455da61298', '61668db7-18a3-4d29-88b4-affa91314875', 2, '2024-06-29 23:02:00'),   
+    ('3b90473c-3b17-48ef-80eb-8b7e3be99dde','Sentinto sintomas a mais de 1 semana', 'c25cef14-c78e-414c-964b-154c5043cba1', '0d1ad8a3-55a4-4a54-9ee1-880d64fec4ef', 1, '2024-06-30 11:20:00'),                                                                                   
+    ('0e48b1c8-2c2b-4183-8460-474e60fce410','Sentinto sintomas a mais de 2 semanas', 'a5835e44-d141-4930-9002-1af08f4ad6b6', '4977084d-6e83-40e2-bd6a-8bf68f13afb8', 2, '2024-06-30 09:40:00'),  
+    ('d13db283-4369-4d8f-8196-b8cb0090768e','Sentinto sintomas a mais de 2 semanas', '1f3d616b-f0ff-4d1f-bd60-555c59740d2c', '4928f6c3-ba1b-4523-bda5-926035ec1d0c', 2, '2024-06-30 02:20:00'),  
+    ('27b44492-2598-433c-91f3-ad5ecce925ab','Sentinto sintomas a mais de 2 semanas', 'e7a77001-6e8c-40b8-ae16-bdad5c292fbc', '5a73e0f4-62a5-401f-b786-81a4a02b602c', 2, '2024-06-30 19:20:00');                                                                                
+              
+                  
+                
+    INSERT INTO tb_report_xref_symptom (fk_report, fk_symptom) VALUES
     ('c35050ef-2a32-4670-9a2e-2d98aa91ae73', 'b5b45059-5a8b-4916-96cb-f9cd254e5d30'),
     ('c35050ef-2a32-4670-9a2e-2d98aa91ae73', '54dfd081-c144-455e-b71f-b93f36c94850'),
     ('c35050ef-2a32-4670-9a2e-2d98aa91ae73', '213b3269-4196-4da3-b7e6-6a6c4195f32c'),
-    ('c35050ef-2a32-4670-9a2e-2d98aa91ae73', '4148baec-7e28-4cb4-b303-7d72b44eacf5');
+    ('c35050ef-2a32-4670-9a2e-2d98aa91ae73', '4148baec-7e28-4cb4-b303-7d72b44eacf5'),
+
+    ('e2192631-1a5c-45c5-9f61-305c7b31fea3', '738c6497-b709-41f3-9cb4-34b536f9f47a'),
+    ('e2192631-1a5c-45c5-9f61-305c7b31fea3', '54dfd081-c144-455e-b71f-b93f36c94850'),
+    ('e2192631-1a5c-45c5-9f61-305c7b31fea3', '213b3269-4196-4da3-b7e6-6a6c4195f32c'),
+    ('e2192631-1a5c-45c5-9f61-305c7b31fea3', '4148baec-7e28-4cb4-b303-7d72b44eacf5'),
+
+    ('ca4a8bfe-8fe6-497c-ba7c-2c593f05fec2', '4148baec-7e28-4cb4-b303-7d72b44eacf5'),
+    ('ca4a8bfe-8fe6-497c-ba7c-2c593f05fec2', '78d56b12-891e-4183-a0a1-e651cbb19d9d'),
+    ('ca4a8bfe-8fe6-497c-ba7c-2c593f05fec2', '738c6497-b709-41f3-9cb4-34b536f9f47a'),
+    ('ca4a8bfe-8fe6-497c-ba7c-2c593f05fec2', '54dfd081-c144-455e-b71f-b93f36c94850'),
+
+    ('939be18e-2187-431f-ab5d-b9ffb52c7e15', '738c6497-b709-41f3-9cb4-34b536f9f47a'),
+    ('939be18e-2187-431f-ab5d-b9ffb52c7e15', '036506d1-02c8-40b5-94bb-eb0d7a9c1052'),
+    ('939be18e-2187-431f-ab5d-b9ffb52c7e15', '54dfd081-c144-455e-b71f-b93f36c94850'),
+    ('939be18e-2187-431f-ab5d-b9ffb52c7e15', '4148baec-7e28-4cb4-b303-7d72b44eacf5'),
+
+    ('4dd9dae8-fade-4716-9fca-1b01c5601b72', '738c6497-b709-41f3-9cb4-34b536f9f47a'),
+    ('4dd9dae8-fade-4716-9fca-1b01c5601b72', '213b3269-4196-4da3-b7e6-6a6c4195f32c'),
+    ('4dd9dae8-fade-4716-9fca-1b01c5601b72', 'e4cde92b-73bc-4978-891d-f8d5af92132c'),
+    ('4dd9dae8-fade-4716-9fca-1b01c5601b72', '2173180e-edb8-46c9-a926-8729e8d64196'),
+
+    ('951cd71c-28de-4241-824e-278484ff3940', '54dfd081-c144-455e-b71f-b93f36c94850'),
+    ('951cd71c-28de-4241-824e-278484ff3940', 'b5b45059-5a8b-4916-96cb-f9cd254e5d30'),
+    ('951cd71c-28de-4241-824e-278484ff3940', '4148baec-7e28-4cb4-b303-7d72b44eacf5'),
+    ('951cd71c-28de-4241-824e-278484ff3940', '2173180e-edb8-46c9-a926-8729e8d64196'),
+
+    ('3a792774-671f-4b78-8458-22dc89ff42a7', '54dfd081-c144-455e-b71f-b93f36c94850'),
+    ('3a792774-671f-4b78-8458-22dc89ff42a7', '213b3269-4196-4da3-b7e6-6a6c4195f32c'),
+    ('3a792774-671f-4b78-8458-22dc89ff42a7', 'b5b45059-5a8b-4916-96cb-f9cd254e5d30'),
+    ('3a792774-671f-4b78-8458-22dc89ff42a7', '2173180e-edb8-46c9-a926-8729e8d64196'),
+    
+    ('ff07460a-dfed-46a0-8c00-3e713797baac', '54dfd081-c144-455e-b71f-b93f36c94850'),
+    ('ff07460a-dfed-46a0-8c00-3e713797baac', '213b3269-4196-4da3-b7e6-6a6c4195f32c'),
+    ('ff07460a-dfed-46a0-8c00-3e713797baac', 'b5b45059-5a8b-4916-96cb-f9cd254e5d30'),
+    ('ff07460a-dfed-46a0-8c00-3e713797baac', '2173180e-edb8-46c9-a926-8729e8d64196'),
+
+    ('d2190456-0abc-4f59-b967-7764a50f5721', '54dfd081-c144-455e-b71f-b93f36c94850'),
+    ('d2190456-0abc-4f59-b967-7764a50f5721', '213b3269-4196-4da3-b7e6-6a6c4195f32c'),
+    ('d2190456-0abc-4f59-b967-7764a50f5721', 'b5b45059-5a8b-4916-96cb-f9cd254e5d30'),
+    ('d2190456-0abc-4f59-b967-7764a50f5721', '2173180e-edb8-46c9-a926-8729e8d64196'),
+
+     ('b00a3f77-c927-4cb5-9b4d-2cded2612a5c', '738c6497-b709-41f3-9cb4-34b536f9f47a'),
+    ('b00a3f77-c927-4cb5-9b4d-2cded2612a5c', '213b3269-4196-4da3-b7e6-6a6c4195f32c'),
+    ('b00a3f77-c927-4cb5-9b4d-2cded2612a5c', 'e4cde92b-73bc-4978-891d-f8d5af92132c'),
+    ('b00a3f77-c927-4cb5-9b4d-2cded2612a5c', '2173180e-edb8-46c9-a926-8729e8d64196'),
+
+    ('b62b8bc8-0741-49a4-8bc2-ab26ecdb83b7', 'b5b45059-5a8b-4916-96cb-f9cd254e5d30'),
+    ('b62b8bc8-0741-49a4-8bc2-ab26ecdb83b7', '54dfd081-c144-455e-b71f-b93f36c94850'),
+    ('b62b8bc8-0741-49a4-8bc2-ab26ecdb83b7', '213b3269-4196-4da3-b7e6-6a6c4195f32c'),
+    ('b62b8bc8-0741-49a4-8bc2-ab26ecdb83b7', '4148baec-7e28-4cb4-b303-7d72b44eacf5'),
+
+    ('b249a94a-9986-4814-857d-0c2272762791', '54dfd081-c144-455e-b71f-b93f36c94850'),
+    ('b249a94a-9986-4814-857d-0c2272762791', 'b5b45059-5a8b-4916-96cb-f9cd254e5d30'),
+    ('b249a94a-9986-4814-857d-0c2272762791', '4148baec-7e28-4cb4-b303-7d72b44eacf5'),
+    ('b249a94a-9986-4814-857d-0c2272762791', '2173180e-edb8-46c9-a926-8729e8d64196'),
+
+    ('31d9ee4c-edf0-4759-8a50-6011446fc84c', '738c6497-b709-41f3-9cb4-34b536f9f47a'),
+    ('31d9ee4c-edf0-4759-8a50-6011446fc84c', '54dfd081-c144-455e-b71f-b93f36c94850'),
+    ('31d9ee4c-edf0-4759-8a50-6011446fc84c', '213b3269-4196-4da3-b7e6-6a6c4195f32c'),
+    ('31d9ee4c-edf0-4759-8a50-6011446fc84c', '4148baec-7e28-4cb4-b303-7d72b44eacf5'),
+
+    ('d7dd2a61-3672-46cf-9f81-c258d09f5873', '54dfd081-c144-455e-b71f-b93f36c94850'),
+    ('d7dd2a61-3672-46cf-9f81-c258d09f5873', 'b5b45059-5a8b-4916-96cb-f9cd254e5d30'),
+    ('d7dd2a61-3672-46cf-9f81-c258d09f5873', '4148baec-7e28-4cb4-b303-7d72b44eacf5'),
+    ('d7dd2a61-3672-46cf-9f81-c258d09f5873', '2173180e-edb8-46c9-a926-8729e8d64196'),
+
+    ('43090799-6bfa-43cc-a1d7-ad584edfce1b', 'b5b45059-5a8b-4916-96cb-f9cd254e5d30'),
+    ('43090799-6bfa-43cc-a1d7-ad584edfce1b', '54dfd081-c144-455e-b71f-b93f36c94850'),
+    ('43090799-6bfa-43cc-a1d7-ad584edfce1b', '213b3269-4196-4da3-b7e6-6a6c4195f32c'),
+    ('43090799-6bfa-43cc-a1d7-ad584edfce1b', '4148baec-7e28-4cb4-b303-7d72b44eacf5'),
+
+    ('6ac358b5-7ad9-43ae-849e-f184afc5515f', '4148baec-7e28-4cb4-b303-7d72b44eacf5'),
+    ('6ac358b5-7ad9-43ae-849e-f184afc5515f', '78d56b12-891e-4183-a0a1-e651cbb19d9d'),
+    ('6ac358b5-7ad9-43ae-849e-f184afc5515f', '738c6497-b709-41f3-9cb4-34b536f9f47a'),
+    ('6ac358b5-7ad9-43ae-849e-f184afc5515f', '54dfd081-c144-455e-b71f-b93f36c94850'),
+
+    ('7432a806-c420-4521-af64-3a68558d2d05', '54dfd081-c144-455e-b71f-b93f36c94850'),
+    ('7432a806-c420-4521-af64-3a68558d2d05', 'b5b45059-5a8b-4916-96cb-f9cd254e5d30'),
+    ('7432a806-c420-4521-af64-3a68558d2d05', '4148baec-7e28-4cb4-b303-7d72b44eacf5'),
+    ('7432a806-c420-4521-af64-3a68558d2d05', '2173180e-edb8-46c9-a926-8729e8d64196'),
+
+    ('5615ae40-b3b5-4861-bdd0-c9a2df2a4a0a', 'b5b45059-5a8b-4916-96cb-f9cd254e5d30'),
+    ('5615ae40-b3b5-4861-bdd0-c9a2df2a4a0a', '54dfd081-c144-455e-b71f-b93f36c94850'),
+    ('5615ae40-b3b5-4861-bdd0-c9a2df2a4a0a', '213b3269-4196-4da3-b7e6-6a6c4195f32c'),
+    ('5615ae40-b3b5-4861-bdd0-c9a2df2a4a0a', '4148baec-7e28-4cb4-b303-7d72b44eacf5'),
+
+    ('f65512a8-0baa-4c4c-8a9d-360ca15355b3', 'b5b45059-5a8b-4916-96cb-f9cd254e5d30'),
+    ('f65512a8-0baa-4c4c-8a9d-360ca15355b3', '54dfd081-c144-455e-b71f-b93f36c94850'),
+    ('f65512a8-0baa-4c4c-8a9d-360ca15355b3', '213b3269-4196-4da3-b7e6-6a6c4195f32c'),
+    ('f65512a8-0baa-4c4c-8a9d-360ca15355b3', '4148baec-7e28-4cb4-b303-7d72b44eacf5'),
+
+    ('303a8a91-4c11-4d78-9bd0-07ab6463d8db', '4148baec-7e28-4cb4-b303-7d72b44eacf5'),
+    ('303a8a91-4c11-4d78-9bd0-07ab6463d8db', '78d56b12-891e-4183-a0a1-e651cbb19d9d'),
+    ('303a8a91-4c11-4d78-9bd0-07ab6463d8db', '738c6497-b709-41f3-9cb4-34b536f9f47a'),
+    ('303a8a91-4c11-4d78-9bd0-07ab6463d8db', '54dfd081-c144-455e-b71f-b93f36c94850'),
+
+    ('d4cd3aa3-e4eb-497b-b4e0-263e2ce87c5a', '738c6497-b709-41f3-9cb4-34b536f9f47a'),
+    ('d4cd3aa3-e4eb-497b-b4e0-263e2ce87c5a', '036506d1-02c8-40b5-94bb-eb0d7a9c1052'),
+    ('d4cd3aa3-e4eb-497b-b4e0-263e2ce87c5a', '54dfd081-c144-455e-b71f-b93f36c94850'),
+    ('d4cd3aa3-e4eb-497b-b4e0-263e2ce87c5a', '4148baec-7e28-4cb4-b303-7d72b44eacf5'),
+
+    ('f8571287-4772-41b5-97f7-c27bdc834d7f', '54dfd081-c144-455e-b71f-b93f36c94850'),
+    ('f8571287-4772-41b5-97f7-c27bdc834d7f', '213b3269-4196-4da3-b7e6-6a6c4195f32c'),
+    ('f8571287-4772-41b5-97f7-c27bdc834d7f', 'b5b45059-5a8b-4916-96cb-f9cd254e5d30'),
+    ('f8571287-4772-41b5-97f7-c27bdc834d7f', '2173180e-edb8-46c9-a926-8729e8d64196'),
+
+     ('25373651-165b-4a46-8b18-d49d81a06cf4', '738c6497-b709-41f3-9cb4-34b536f9f47a'),
+    ('25373651-165b-4a46-8b18-d49d81a06cf4', '213b3269-4196-4da3-b7e6-6a6c4195f32c'),
+    ('25373651-165b-4a46-8b18-d49d81a06cf4', 'e4cde92b-73bc-4978-891d-f8d5af92132c'),
+    ('25373651-165b-4a46-8b18-d49d81a06cf4', '2173180e-edb8-46c9-a926-8729e8d64196'),
+
+    ('e0d4c260-6d60-424f-8452-f620b012acc5', 'b5b45059-5a8b-4916-96cb-f9cd254e5d30'),
+    ('e0d4c260-6d60-424f-8452-f620b012acc5', '54dfd081-c144-455e-b71f-b93f36c94850'),
+    ('e0d4c260-6d60-424f-8452-f620b012acc5', '213b3269-4196-4da3-b7e6-6a6c4195f32c'),
+    ('e0d4c260-6d60-424f-8452-f620b012acc5', '4148baec-7e28-4cb4-b303-7d72b44eacf5'),
+
+    
+    ('d9cc1a80-f536-4def-af7c-41ea9050d625', 'b5b45059-5a8b-4916-96cb-f9cd254e5d30'),
+    ('d9cc1a80-f536-4def-af7c-41ea9050d625', '54dfd081-c144-455e-b71f-b93f36c94850'),
+    ('d9cc1a80-f536-4def-af7c-41ea9050d625', '213b3269-4196-4da3-b7e6-6a6c4195f32c'),
+    ('d9cc1a80-f536-4def-af7c-41ea9050d625', '4148baec-7e28-4cb4-b303-7d72b44eacf5'),
+
+    ('108c43e4-be6c-4ea1-8feb-27be079b48a3', '54dfd081-c144-455e-b71f-b93f36c94850'),
+    ('108c43e4-be6c-4ea1-8feb-27be079b48a3', '213b3269-4196-4da3-b7e6-6a6c4195f32c'),
+    ('108c43e4-be6c-4ea1-8feb-27be079b48a3', 'b5b45059-5a8b-4916-96cb-f9cd254e5d30'),
+    ('108c43e4-be6c-4ea1-8feb-27be079b48a3', '2173180e-edb8-46c9-a926-8729e8d64196'),
+
+    ('3b90473c-3b17-48ef-80eb-8b7e3be99dde', '738c6497-b709-41f3-9cb4-34b536f9f47a'),
+    ('3b90473c-3b17-48ef-80eb-8b7e3be99dde', '213b3269-4196-4da3-b7e6-6a6c4195f32c'),
+    ('3b90473c-3b17-48ef-80eb-8b7e3be99dde', 'e4cde92b-73bc-4978-891d-f8d5af92132c'),
+    ('3b90473c-3b17-48ef-80eb-8b7e3be99dde', '2173180e-edb8-46c9-a926-8729e8d64196'),
+
+    ('0e48b1c8-2c2b-4183-8460-474e60fce410', '738c6497-b709-41f3-9cb4-34b536f9f47a'),
+    ('0e48b1c8-2c2b-4183-8460-474e60fce410', '213b3269-4196-4da3-b7e6-6a6c4195f32c'),
+    ('0e48b1c8-2c2b-4183-8460-474e60fce410', 'e4cde92b-73bc-4978-891d-f8d5af92132c'),
+    ('0e48b1c8-2c2b-4183-8460-474e60fce410', '2173180e-edb8-46c9-a926-8729e8d64196'),
+
+    ('d13db283-4369-4d8f-8196-b8cb0090768e', '738c6497-b709-41f3-9cb4-34b536f9f47a'),
+    ('d13db283-4369-4d8f-8196-b8cb0090768e', '213b3269-4196-4da3-b7e6-6a6c4195f32c'),
+    ('d13db283-4369-4d8f-8196-b8cb0090768e', 'e4cde92b-73bc-4978-891d-f8d5af92132c'),
+    ('d13db283-4369-4d8f-8196-b8cb0090768e', '2173180e-edb8-46c9-a926-8729e8d64196');
