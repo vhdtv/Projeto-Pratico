@@ -116,4 +116,9 @@ public class ReportModel implements Serializable {
     public void setQueue(ServiceQueueModel queue) {
         this.queue = queue;
     }
+
+    public ReportModel() {
+        super();
+        this.uuid = UUID.randomUUID();
+    }
 }

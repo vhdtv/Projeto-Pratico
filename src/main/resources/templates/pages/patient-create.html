@@ -43,7 +43,6 @@
                         <div class="col-12 col-md-6 col-lg-4 mb-3">
                             <label for="sexo" class="fs-6 form-label">Sexo</label>
                             <select th:field="*{patient.genre}" class="form-select" id="sexo">
-                                <option value="" selected="selected" disabled="disabled">Selecione uma opção</option>
                                 <option class="form-check" th:each="genre : ${genreList}" th:value="${genre.id}" th:text="${genre.name}"></option>
                             </select>
                         </div>
@@ -58,15 +57,17 @@
                         <div class="col-12 col-md-6 col-lg-4 mb-3">
                             <label for="sintoma" class="fs-6 form-label">Tipo de sintoma</label>
                             <select th:field="*{xSymptoms[__${iStat.index}__].symptomModel.name}" class="form-select" id="sintoma">
+                                <option value="" selected="selected">Selecione Uma</option>
                                 <option class="form-check" th:each="symptom : ${symptomList}" th:value="${symptom.uuid}" th:text="${symptom.name}"></option>
                             </select>
                         </div>
                         <div class="col-12 col-md-6 col-lg-4 mb-3">
                             <label for="intensidade" class="fs-6 form-label">Intensidade</label>
                             <select th:field="*{xSymptoms[__${iStat.index}__].intensity}" name="intensidade" class="form-select" id="intensidade">
-                                <option value="Baixa">Baixa</option>
-                                <option value="Média">Média</option>
-                                <option value="Alta">Alta</option>
+                                <option value="" selected="selected">Selecione Uma</option>
+                                <option value="1">Baixa</option>
+                                <option value="3">Média</option>
+                                <option value="5">Alta</option>
                             </select>
                         </div>
                         <div class="col-12 col-md-6 col-lg-4 mb-3">
