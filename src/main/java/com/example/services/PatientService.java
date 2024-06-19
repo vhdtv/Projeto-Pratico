@@ -39,7 +39,7 @@ public class PatientService {
         AddressModel patientAddress = new AddressModel();
         if (patientRecordDto.address() != null) {
             BeanUtils.copyProperties(patientRecordDto.address().get(), patientAddress);
-            patientModel.setId_address(patientAddress);
+            patientModel.setAddress(patientAddress);
         }
         return patientRepository.save(patientModel);
     }
@@ -64,7 +64,7 @@ public class PatientService {
         if (!updates.address().isEmpty()) {
             AddressModel addressModel = new AddressModel();
             BeanUtils.copyProperties(updates.address().get(), addressModel);
-            patient.setId_address(addressModel);
+            patient.setAddress(addressModel);
         }
         if (!updates.phoneNumber().isEmpty()) {
             patient.setPhoneNumber(updates.phoneNumber().get());

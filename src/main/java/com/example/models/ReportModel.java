@@ -242,4 +242,9 @@ public class ReportModel implements Serializable, Comparable<ReportModel> {
     public void setQueue(ServiceQueueModel queue) {
         this.queue = queue;
     }
+
+    @Override
+    public int compareTo(ReportModel o) {
+        return Integer.compare(o.getTotalScore(), this.getTotalScore());
+    }
 }
