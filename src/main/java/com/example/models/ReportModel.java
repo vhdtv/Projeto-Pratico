@@ -247,4 +247,9 @@ public class ReportModel implements Serializable, Comparable<ReportModel> {
     public int compareTo(ReportModel o) {
         return Integer.compare(o.getTotalScore(), this.getTotalScore());
     }
+
+    public ReportModel() {
+        super();
+        this.uuid = UUID.randomUUID();
+    }
 }

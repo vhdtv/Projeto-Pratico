@@ -34,9 +34,13 @@ public class DashboardController {
 
         // Busca todos os registros de atendimento
         List<ReportModel> attendanceRegistrations = this.attendanceRegistrationRepository.findAll();
+        attendanceRegistrations.sort((r1, r2) -> {
+            return (int) (TimeUnit.MILLISECONDS.toHours(r2.getCreatedAt().getTime())
+                    - TimeUnit.MILLISECONDS.toHours(r1.getCreatedAt().getTime()));
+        });
         context.addAttribute("lastAttendanceRegistrations", attendanceRegistrations);
 
-        // Calcula o total de pacientes 
+        // Calcula o total de pacientes
         int totalPacients = (int) this.attendanceRegistrationRepository.count();
         context.addAttribute("totalPatients", totalPacients);
 
@@ -89,8 +93,8 @@ public class DashboardController {
                 .map(Map.Entry::getKey)
                 .orElse(null);
 
-                // Adiciona o sintoma mais frequente ao model
-                context.addAttribute("highSymptom", highSymptom != null ? highSymptom.getName() : null);
+        // Adiciona o sintoma mais frequente ao model
+        context.addAttribute("highSymptom", highSymptom != null ? highSymptom.getName() : null);
 
         // Retorna a view do dashboard
         return "pages/dashboard";

@@ -62,7 +62,7 @@ public class AttendanceQueueController {
             // report.setPriority(priority);
             attendanceRegistrationRepository.save(report);
         }
-        
+
         // Collections.sort(queue, Comparator.comparing(ReportModel::getTotalScore));
         // .thenComparing(ReportModel::getTotalScore));
         // queue.sort((r1, r2) -> reportWeightMap.get(r2) - reportWeightMap.get(r1));
@@ -83,12 +83,13 @@ public class AttendanceQueueController {
         naoUrgenteList = queue.stream()
                 .filter(r1 -> r1.getPriority().getDescription().equals("Não Urgente"))
                 .collect(Collectors.toList());
-        
+
         Collections.sort(emergenciaList);
         Collections.sort(urgenciaList);
         Collections.sort(poucaUrgenciaList);
         Collections.sort(naoUrgenteList);
-        List<ReportModel> finalQueue = Stream.of(emergenciaList, urgenciaList, poucaUrgenciaList, naoUrgenteList).flatMap(Collection::stream).collect(Collectors.toList());
+        List<ReportModel> finalQueue = Stream.of(emergenciaList, urgenciaList, poucaUrgenciaList, naoUrgenteList)
+                .flatMap(Collection::stream).collect(Collectors.toList());
 
         context.addAttribute("queue", finalQueue);
         return "pages/queue";

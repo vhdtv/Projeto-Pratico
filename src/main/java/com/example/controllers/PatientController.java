@@ -58,7 +58,7 @@ public class PatientController {
     @Autowired
     PatientXrefSymptomRepository patientXrefSymptomRepository;
     @Autowired
-    ReportXrefSymptomRepository ReportXrefSymptomRepository;
+    ReportXrefSymptomRepository reportXrefSymptomRepository;
     @Autowired
     ReportRepository reportRepository;
     @Autowired
@@ -129,15 +129,27 @@ public class PatientController {
             patientXrefSymptom.setPatient(patient);
             patientXrefSymptom.setSymptom(symptom);
             patientSymptoms.add(patientXrefSymptom);
+
+            /** Second save */
+            ReportXrefSymptomsModel reportXrefSymptom = new ReportXrefSymptomsModel();
+            reportXrefSymptom.setReport(report);
+            reportXrefSymptom.setSymptom(symptom);
+            reportSymptoms.add(reportXrefSymptom);
         }
         report.setPriority(this.calculatePriority(symptoms));
         report.setSymptoms(reportSymptoms);
         report = this.reportRepository.saveAndFlush(report);
         for (SymptomModel symptom : symptoms)
             this.symptomRepository.saveAndFlush(symptom);
+        for (ReportXrefSymptomsModel symptom : reportSymptoms)
+            this.reportXrefSymptomRepository.saveAndFlush(symptom);
         for (PatientXrefSymptomModel symptomData : patientSymptoms) {
             symptomData.setAttendanceRegistration(report);
             this.patientXrefSymptomRepository.saveAndFlush(symptomData);
+        }
+        for (ReportXrefSymptomsModel symptomData : reportSymptoms) {
+            symptomData.setReport(report);
+            this.reportXrefSymptomRepository.saveAndFlush(symptomData);
         }
         return "redirect:/patient/list";
     }
